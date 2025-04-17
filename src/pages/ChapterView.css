@@ -1,0 +1,126 @@
+/* src/pages/ChapterView.css */
+.chapter-view-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+  }
+  
+  .navigation-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 15px;
+  }
+  
+  .navigation-header .back-button {
+      margin-bottom: 0; /* Override default margin */
+      flex-shrink: 0; /* Prevent shrinking */
+  }
+  
+  .chapter-title {
+    color: #333;
+    font-size: 1.8em;
+    text-align: center;
+    margin: 0 15px; /* Add spacing around title */
+    flex-grow: 1; /* Allow title to take available space */
+    min-width: 0; /* Allow shrinking if needed */
+  }
+  
+  .header-actions {
+      min-width: 80px; /* Reserve some space, adjust as needed */
+      flex-shrink: 0;
+      /* Add buttons or icons here later if needed */
+  }
+  
+  
+  .verses-container {
+    margin-bottom: 30px;
+    line-height: 1.8;
+    font-size: 1.1em; /* Slightly larger font for readability */
+    color: #333;
+  }
+  
+  .verse {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start; /* Align number top-left */
+  }
+  
+  .verse-number {
+    font-weight: bold;
+    color: #3498db;
+    min-width: 25px; /* Ensure space for verse numbers */
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 0.85em; /* Make number slightly smaller */
+    position: relative;
+    top: -2px; /* Fine-tune vertical alignment */
+  }
+  
+  .verse-text {
+    flex: 1; /* Allow text to take remaining space */
+  }
+  
+  .chapter-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+  
+  .nav-link {
+    padding: 10px 18px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #3498db;
+    transition: background-color 0.2s, color 0.2s;
+    background-color: #fff;
+  }
+  
+  .nav-link:hover:not(.disabled) {
+    background-color: #3498db;
+    color: #fff;
+    border-color: #2980b9;
+  }
+  
+  .nav-link.disabled {
+    color: #aaa;
+    cursor: not-allowed;
+    border-color: #eee;
+    background-color: #f9f9f9;
+  }
+  
+  @media (max-width: 600px) {
+    .chapter-title {
+      font-size: 1.5em;
+    }
+    .navigation-header {
+        flex-direction: column;
+        align-items: stretch; /* Make items full width */
+    }
+    .navigation-header .back-button {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+     .header-actions {
+         display: none; /* Hide empty actions space on small screens */
+     }
+  
+    .verse {
+      font-size: 1em; /* Adjust font size for smaller screens */
+    }
+    .chapter-navigation {
+      font-size: 0.9em;
+    }
+    .nav-link {
+        padding: 8px 12px;
+    }
+  }

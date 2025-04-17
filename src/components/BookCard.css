@@ -1,0 +1,76 @@
+/* src/components/BookCard.css */
+
+/* Link styling */
+.book-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block; /* Make link take up grid space */
+  height: 100%; /* Fill grid cell height */
+}
+
+/* Base Card Styling - Simplified */
+.book-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  /* --- ADJUSTED PADDING --- */
+  padding: 5px; /* Reduced top/bottom padding */
+  margin: 0; /* Use grid gap */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+  justify-content: center; /* Center items vertically */
+  text-align: center; /* Center text content */
+  /*  min-height: 145px; Adjust minimum height if needed after padding change */
+ /* height: 90%;  Fill link height */
+  overflow: hidden; /* Prevent content spill */
+}
+
+.book-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px); /* Subtle lift effect */
+}
+
+/* Book Name Styling */
+.book-name-ml {
+  font-size: 1.35em; /* Slight adjustment */
+  color: #007bff; /* Theme color */
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* Meta Info Container */
+.book-meta-container{
+  text-align: center;
+}
+.book-meta {
+  
+  flex-direction: column;
+  font-size: 0.88em; /* Slight adjustment */
+  color: #555;
+  line-height: 1.55;
+  width: 100%; /* Allow paragraphs inside to center correctly */
+  margin-top: 8px; /* Added small space above meta */
+}
+
+/* Meta Paragraphs (Writer/Date) */
+.book-meta p {
+  margin: 0;
+}
+
+
+.book-meta .icon {   
+  font-size: 1.05em; 
+
+}
+
+/* Specific text styles */
+
+
+
+
+
+
+/* No expansion/chapter styles needed */

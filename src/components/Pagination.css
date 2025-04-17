@@ -1,0 +1,70 @@
+/* src/components/Pagination.css */
+.pagination-container {
+    display: flex; justify-content: center; align-items: center; padding: 15px 0; margin-top: 20px; flex-wrap: wrap;
+  }
+  
+  .page-button {
+    background-color: #fff; /* White background */
+    border: 1px solid #dee2e6;
+    color: #495057;
+    padding: 8px 0; /* Vertical padding only */
+    width: 40px; /* Fixed width */
+    height: 38px; /* Fixed height */
+    margin: 3px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95em; /* Slightly larger font */
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+    text-align: center;
+    position: relative;
+    line-height: 1.2;
+    display: inline-flex; /* Center content */
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .page-button:hover:not(:disabled):not(.active) {
+    background-color: #f8f9fa; /* Light hover */
+    border-color: #adb5bd;
+  }
+  
+  .page-button.active {
+    background-color: #0d6efd; /* Bootstrap primary blue */
+    border-color: #0d6efd;
+    color: white;
+    font-weight: 600;
+    cursor: default;
+    box-shadow: 0 2px 4px rgba(13, 110, 253, 0.3);
+  }
+  
+  /* Style for <<, >> buttons */
+  .page-button.boundary {
+      font-weight: bold;
+      padding: 8px 10px; /* Adjust padding */
+      width: auto; /* Auto width for symbols */
+      background-color: #f8f9fa; /* Lighter background */
+      border-color: #dee2e6;
+      color: #6c757d;
+  }
+  .page-button.boundary:hover:not(:disabled) {
+      background-color: #e9ecef;
+      border-color: #adb5bd;
+      color: #495057;
+  }
+  
+  .page-button.boundary:disabled {
+      color: #adb5bd; cursor: not-allowed; background-color: #f8f9fa; border-color: #dee2e6; opacity: 0.6;
+  }
+  
+  .page-ellipsis {
+      padding: 8px 5px; color: #6c757d; margin: 0 3px; display: inline-flex; align-items: center;
+  }
+  
+  /* Visual indicator for active page (like ▼) */
+  .page-button.active .active-indicator {
+      display: inline-block;
+      margin-left: 3px;
+      font-size: 0.6em; /* Smaller arrow */
+      transform: translateY(1px);
+      color: rgba(255, 255, 255, 0.9);
+  }

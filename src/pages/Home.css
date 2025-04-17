@@ -1,0 +1,100 @@
+/* src/pages/Home.css */
+
+/* --- Overall Page Container --- */
+.home-container {
+    padding: 20px;
+    /* --- INCREASED MAX WIDTH --- */
+    max-width: 1300px; /* Example: Increased width for larger screens */
+    margin: 0 auto; /* Center the container */
+  }
+  
+  /* --- Main Application Title --- */
+  .app-title {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 2em;
+  }
+  
+  /* --- Search Bar Container Spacing --- */
+  .search-bar-container {
+      margin-bottom: 20px;
+  }
+  
+  /* --- Status Messages Area --- */
+  .home-status-messages {
+      text-align: center;
+      min-height: 0px;
+      margin-bottom: 10px;
+      padding: 0 15px;
+  }
+  .home-status-messages .error-message { margin-bottom: 10px; }
+  .home-status-messages .loading-update { color: #7f8c8d; font-style: italic; margin-bottom: 10px; }
+  
+  /* --- Book Grid Layout (Adjusted Min Width & Gap) --- */
+  .book-grid {
+    display: grid;
+    /* --- ADJUSTED Grid Columns for Width & Gap --- */
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); /* Increased min width */
+    gap: 20px; /* INCREASED gap between cards */
+    justify-content: center;
+    grid-auto-rows: auto;
+    align-items: stretch; /* Stretch items to fill cell height */
+    padding-bottom: 20px;
+  }
+  
+  /* --- Message when no books --- */
+  .no-books-message {
+      text-align: center; color: #666; padding: 30px 0; font-style: italic;
+  }
+  
+  /* --- Refresh Button Container (Bottom) --- */
+  .home-refresh-container {
+      text-align: center; margin-top: 30px; padding-bottom: 10px;
+  }
+  .refresh-button {
+    display: inline-block; padding: 10px 20px; background-color: #3498db; color: white;
+    border: none; border-radius: 5px; cursor: pointer; font-size: 1em;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .refresh-button:hover:not(:disabled) { background-color: #2980b9; box-shadow: 0 2px 5px rgba(0,0,0,0.15); }
+  .refresh-button:disabled { background-color: #bdc3c7; cursor: not-allowed; box-shadow: none; }
+  
+  /* --- Responsive Adjustments --- */
+  /* Keep previous adjustments, maybe tweak grid further */
+  @media (max-width: 1200px) { /* Adjust based on new max-width */
+       .book-grid {
+          grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+          gap: 25px;
+      }
+  }
+  @media (max-width: 992px) {
+      .book-grid {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 20px;
+      }
+  }
+  @media (max-width: 768px) {
+      .home-container { padding: 15px; }
+      .app-title { font-size: 1.8em; margin-bottom: 25px; }
+      .book-grid {
+          grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+          gap: 18px;
+      }
+  }
+  @media (max-width: 576px) {
+      .book-grid {
+          grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+          gap: 15px;
+      }
+      .app-title { font-size: 1.6em; }
+      .refresh-button { font-size: 0.95em; padding: 9px 18px; }
+  }
+  @media (max-width: 480px) {
+     .book-grid {
+          grid-template-columns: 1fr; /* Switch to single column */
+          gap: 15px;
+     }
+  }

@@ -1,0 +1,207 @@
+/* src/pages/BookView.css */
+
+/* --- Base Container --- */
+.book-view-container {
+    padding: 20px 15px;
+    max-width: 950px; /* Max width of your content area - IMPORTANT for calc() */
+    margin: 20px auto;
+    background-color: #fdfdfd;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    position: relative; /* Keep if needed for other elements */
+  }
+  
+  /* --- Error Page Specific Styling --- */
+  .book-view-container.error-page {
+      text-align: center;
+      padding: 40px;
+  }
+  .book-view-container.error-page .book-view-back-button {
+      margin-top: 20px;
+  }
+  
+  /* --- Top Bar (Back/Home Buttons + Search) --- */
+  .book-view-top-bar {
+      display: flex;
+      justify-content: space-between; /* Pushes button group and search apart */
+      align-items: center;
+      margin-bottom: 25px;
+      gap: 15px;
+      flex-wrap: wrap;
+  }
+  
+  /* Container for Back and Home buttons */
+  .page-navigation-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px; /* Space between back and home buttons */
+      flex-shrink: 0; /* Prevent shrinking */
+  }
+  
+  /* Generic styles for nav buttons in this top bar */
+  .book-view-top-bar .nav-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid #ccc;
+    color: #555;
+    padding: 0 12px; /* Horizontal padding */
+    height: 34px; /* Match height */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em; /* Adjust icon/arrow size */
+    line-height: 1;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .book-view-top-bar .nav-button:hover {
+      background-color: #eee;
+      color: #333;
+      border-color: #bbb;
+  }
+
+  .book-view-top-bar .nav-button.home-button {
+      font-size: 1.3em; /* Make home icon slightly larger */
+      padding: 0 10px; /* Adjust padding for icon */
+  }
+  
+  
+  /* Search Bar within Top Bar */
+  .book-view-top-bar .search-bar-container {
+      flex-grow: 1; /* Allow search to take remaining space */
+      max-width: 450px; /* Limit width */
+      margin-bottom: 0;
+      padding: 0;
+      min-width: 200px; /* Ensure it doesn't get too small */
+  }
+  .book-view-top-bar .search-input { /* Assuming input class within SearchBar */
+       padding: 8px 15px; /* Adjust size */
+       font-size: 1em;
+       margin-bottom: 0;
+  }
+  
+  /* --- Book Title --- */
+  .book-view-title {
+    text-align: center; color: #333; margin-top: 50px; /* Added margin top */
+    margin-bottom: 5px; font-size: 1.8em; font-weight: 600; line-height: 1.3;
+  }
+  .book-view-title .english-name {
+      font-weight: 300; color: #666; font-size: 0.85em; margin-left: 4px; white-space: nowrap;
+  }
+  
+  /* --- Current Chapter Indicator --- */
+  .current-chapter-indicator {
+      text-align: center; font-size: 1.3em; font-weight: 400; color: #555;
+      margin-top: 0; margin-bottom: 20px;
+  }
+  
+  /* --- Chapter Navigation Grid --- */
+  .book-view-chapter-nav {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+      margin-bottom: 30px; padding: 12px 5px; border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee; background-color: #fdfdfd;
+  }
+  .book-view-chapter-nav .chapter-button {
+      min-width: 42px; height: 38px; padding: 0 8px; font-size: 0.88em;
+      background-color: #fff; border: 1px solid #ddd; border-radius: 5px; color: #007bff;
+      font-weight: 500; cursor: pointer; transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+      display: inline-flex; align-items: center; justify-content: center; text-decoration: none; flex-shrink: 0;
+  }
+  .book-view-chapter-nav .chapter-button:hover:not(.active) { background-color: #e9ecef; border-color: #ccc; color: #0056b3; }
+  .book-view-chapter-nav .chapter-button.active { background-color: #007bff; color: #fff; border-color: #007bff; font-weight: bold; cursor: default; }
+  .book-view-chapter-nav .info-button { color: #5a6268; border-color: #ced4da; background-color: #f8f9fa; min-width: 55px; }
+  .book-view-chapter-nav .info-button:hover:not(.active) { background-color: #e2e6ea; border-color: #adb5bd; color: #343a40; }
+  .book-view-chapter-nav .info-button.active { background-color: #5a6268; color: #fff; border-color: #5a6268; }
+  
+  /* --- Main Content Area --- */
+  .main-content-area { margin-top: 0; }
+  
+  /* --- Verse Display Styles (Should be in VerseDisplay.css) --- */
+  /* Ensure VerseDisplay.css contains styles for:
+     .verses-container, .verse, .verse-number, .verse-text,
+     .verse-number.clickable, .verse.highlighted-persistent
+  */
+  
+  /* --- Side Navigation Buttons (Fixed Position relative to Viewport) --- */
+  .side-nav-button {
+      position: fixed; /* Fixed relative to viewport */
+      top: 50%;      /* Center vertically in viewport */
+      transform: translateY(-50%);
+      z-index: 1000; /* Ensure they are above other content */
+      background-color: rgba(80, 80, 80, 0.5);
+      color: white; border: none; border-radius: 50%;
+      width: 40px; height: 40px; font-size: 1.6em;
+      line-height: 1; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+      transition: background-color 0.2s ease, opacity 0.2s ease;
+      opacity: 0.7; /* Slightly transparent */
+  }
+  .side-nav-button:hover {
+      opacity: 1; /* Fully visible on hover */
+      background-color: rgba(50, 50, 50, 0.7);
+  }
+  .side-nav-button:disabled {
+      opacity: 0.3; cursor: not-allowed; background-color: rgba(100, 100, 100, 0.4);
+  }
+  
+  /* Horizontal Positioning using calc() - ADJUST 950px if your container max-width changes */
+  .prev-button {
+      /* Position left edge: 50% viewport - half-container - button-width - 15px-gap */
+      left: calc(50% - (950px / 2) - 40px - 50px);
+  }
+  .next-button {
+      /* Position right edge: 50% viewport - half-container - button-width - 15px-gap */
+      right: calc(50% - (950px / 2) - 40px - 50px);
+  }
+  
+  /* Responsive Adjustments for Fixed Buttons */
+  /* Adjust breakpoint (1100px) based on 950px container + buttons + gaps */
+  @media (max-width: 1100px) {
+      .prev-button {
+          left: 15px; /* Fallback: 15px from viewport edge */
+      }
+      .next-button {
+          right: 15px; /* Fallback: 15px from viewport edge */
+      }
+       .side-nav-button {
+          opacity: 0.8;
+          background-color: rgba(50, 50, 50, 0.6);
+      }
+      .side-nav-button:hover {
+          opacity: 1;
+          background-color: rgba(50, 50, 50, 0.7);
+      }
+  }
+  
+  /* --- Other Responsive Adjustments --- */
+  @media (max-width: 768px) {
+      .side-nav-button { width: 38px; height: 38px; font-size: 1.5em; }
+      .prev-button { left: 10px; } /* Smaller gap from viewport edge */
+      .next-button { right: 10px; }
+  
+      .book-view-title { font-size: 1.6em; }
+      .current-chapter-indicator { font-size: 1.2em; }
+      .book-view-chapter-nav .chapter-button { min-width: 40px; height: 36px; font-size: 0.85em; }
+      .book-view-chapter-nav .info-button { min-width: 45px; }
+  }
+  
+  @media (max-width: 600px) {
+      /* Top bar might need responsive adjustments */
+      .book-view-chapter-nav { padding: 10px 0; gap: 6px; margin-bottom: 25px; }
+      .book-view-container {
+        background-color: #fdfdfd;
+        border-radius: 0;
+        box-shadow: none;
+
+      }
+  }
+  
+  /* Optional: Hide on very small screens */
+  /*
+  @media (max-width: 400px) {
+      .side-nav-button {
+          display: none;
+      }
+  }
+  */

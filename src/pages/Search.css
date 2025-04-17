@@ -1,0 +1,145 @@
+/* src/pages/Search.css */
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    padding: 0 15px;
+  }
+  
+  .search-input {
+    width: 100%;
+    max-width: 600px;
+    padding: 12px 18px;
+    font-size: 1.1em;
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1), 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+  
+  /* Optional Search Button Styles */
+  /*
+  .search-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    font-size: 1em;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .search-button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  .search-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+  */
+  
+  .search-status-results {
+      margin-bottom: 30px;
+      padding: 0 15px;
+  }
+  
+  .search-status {
+      text-align: center;
+      color: #777;
+      font-style: italic;
+      margin-bottom: 15px;
+  }
+  
+  .search-error {
+      text-align: center;
+      color: #e74c3c;
+      background-color: #fbeae5;
+      border: 1px solid #e74c3c;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+  }
+  
+  .search-results-container {
+      max-width: 800px;
+      margin: 0 auto;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+  }
+  
+  .search-results-container h2 {
+      font-size: 1.3em;
+      color: #333;
+      margin-bottom: 15px;
+      text-align: center;
+  }
+  
+  .search-results-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  }
+  
+  .search-result-item {
+      margin-bottom: 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+  }
+  .search-result-item:hover {
+      background-color: #f9f9f9;
+  }
+  
+  .search-result-link {
+      display: block;
+      padding: 12px 15px;
+      text-decoration: none;
+      color: inherit;
+  }
+  
+  .result-location {
+      display: block;
+      font-weight: 600;
+      color: #007bff;
+      margin-bottom: 5px;
+      font-size: 0.95em;
+  }
+  
+  .result-text {
+      margin: 0;
+      font-size: 1em;
+      line-height: 1.6;
+      color: #444;
+      /* Optional: Highlight search term - more complex, requires parsing */
+  }
+  
+  .search-limit-notice {
+      text-align: center;
+      font-style: italic;
+      color: #888;
+      font-size: 0.9em;
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #f8f8f8;
+      border-radius: 4px;
+  }
+  
+  .browse-title {
+      text-align: center;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      color: #444;
+      font-weight: 500;
+  }
+  
+  .browse-title-margin {
+      margin-top: 20px; /* Less margin if search error was shown */
+  }

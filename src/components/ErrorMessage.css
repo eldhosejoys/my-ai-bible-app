@@ -1,0 +1,15 @@
+/* src/components/ErrorMessage.css */
+.error-container {
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #e74c3c;
+    background-color: #fbeae5;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .error-text {
+    color: #c0392b;
+    font-weight: bold;
+    margin: 0;
+  }

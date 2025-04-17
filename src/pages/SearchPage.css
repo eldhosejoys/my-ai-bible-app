@@ -1,0 +1,220 @@
+/* src/pages/SearchPage.css */
+
+/* --- Base Page Container --- */
+.search-page-container {
+    padding: 20px;
+    max-width: 900px; /* Max width for search results area */
+    margin: 20px auto; /* Center page content */
+  }
+  
+  /* --- Back/Home Navigation --- */
+  .search-page-nav {
+      margin-bottom: 20px; /* Increased space below nav */
+      display: flex; /* Use Flexbox */
+      align-items: center;
+      gap: 10px; /* Space between buttons */
+      height: 36px; /* Give it some consistent height */
+  }
+  
+  /* Generic styles for nav buttons in this page */
+  .search-page-nav .nav-button { /* Target nav buttons within this specific container */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid #ccc;
+    color: #555;
+    padding: 0 12px; /* Horizontal padding */
+    height: 34px; /* Match height */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em; /* Adjust icon/arrow size */
+    line-height: 1;
+    text-decoration: none; /* Remove underline from link */
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .search-page-nav .nav-button:hover {
+      background-color: #eee;
+      color: #333;
+      border-color: #bbb;
+  }
+  /* Specific adjustments if needed */
+  .search-page-nav .nav-button.back-button {
+      font-weight: bold; /* Example */
+  }
+  .search-page-nav .nav-button.home-button {
+      font-size: 1.3em; /* Example icon size */
+      padding: 0 10px; /* Adjust padding for icon */
+  }
+  
+  /* --- Search Bar Container (Spacing) --- */
+  /* Assuming SearchBar component has root class .search-bar-container */
+  .search-bar-container {
+      margin-bottom: 25px; /* Space after search bar */
+  }
+  /* Styles for .search-input itself are likely in SearchBar.css */
+  
+  /* --- Page Title --- */
+  .search-page-title {
+    text-align: center;
+    color: #333;
+    margin-top: 0; /* Adjusted margin */
+    margin-bottom: 25px; /* Space below title */
+    font-size: 1.6em; /* Adjust size */
+    font-weight: 600;
+  }
+  
+  /* --- Status Messages and Results Area --- */
+  .search-status-results {
+      margin-bottom: 30px;
+      padding: 0 5px; /* Slight horizontal padding */
+      min-height: 100px; /* Ensure space even when empty */
+  }
+  
+  /* Status indicators */
+  .search-status {
+      text-align: center;
+      color: #777;
+      font-style: italic;
+      margin: 20px 0;
+      font-size: 1.1em;
+  }
+  .search-error {
+      text-align: center;
+      color: #e74c3c;
+      background-color: #fbeae5;
+      border: 1px solid #e74c3c;
+      padding: 12px 15px;
+      border-radius: 5px;
+      margin: 20px 0;
+      font-weight: 500;
+  }
+  .search-prompt {
+      text-align: center;
+      color: #666;
+      font-size: 1.1em;
+      margin-top: 40px;
+      margin-bottom: 20px;
+  }
+  
+  /* --- Results Container --- */
+  .search-results-container {
+      margin: 0 auto; /* Centered within its parent */
+      border-top: 1px solid #eee;
+      padding-top: 25px;
+  }
+  .search-results-container h2 {
+      font-size: 1.3em;
+      color: #333;
+      margin: 0 0 20px 0; /* Adjust margins */
+      text-align: center;
+      font-weight: 500;
+  }
+  
+  /* Results List */
+  .search-results-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  }
+  
+  /* Individual Result Item */
+  .search-result-item {
+      margin-bottom: 18px; /* Increased space */
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease;
+      background-color: #fff; /* Ensure background for hover effect */
+  }
+  .search-result-item:hover {
+      background-color: #f9fafb;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  
+  /* Link within result item */
+  .search-result-link {
+      display: block;
+      padding: 15px 18px; /* Increased padding */
+      text-decoration: none;
+      color: inherit;
+  }
+  
+  /* Location (Book Chapter:Verse) */
+  .result-location {
+      display: block;
+      font-weight: 600;
+      color: #007bff; /* Link color */
+      margin-bottom: 8px; /* Increased space */
+      font-size: 0.95em;
+  }
+  
+  /* Verse Text */
+  .result-text {
+      margin: 0;
+      font-size: 1em;
+      line-height: 1.7; /* Readable line height */
+      color: #444; /* Slightly darker text */
+  }
+  
+  /* Highlighted Text using <mark> tag */
+  .result-text mark {
+      background-color: #fff3cd; /* Light yellow highlight */
+      color: #664d03; /* Darker text for highlighted part */
+      padding: 0.1em 0.2em; /* Slight padding */
+      margin: 0; /* Reset margin */
+      border-radius: 3px;
+      font-weight: 600; /* Make highlighted text slightly bolder */
+      box-shadow: none; /* Ensure no unintended shadow */
+  }
+  
+  /* Notice about result limit */
+  .search-limit-notice {
+      text-align: center;
+      font-style: italic;
+      color: #888;
+      font-size: 0.9em;
+      margin: 20px 0 10px 0; /* Adjust margin */
+      padding: 10px;
+      background-color: #f8f8f8;
+      border-radius: 4px;
+  }
+  
+  /* --- Pagination Styles --- */
+  /* Ensure Pagination.css is imported or styles are included here */
+  .pagination-container {
+    display: flex; justify-content: center; align-items: center; padding: 15px 0; margin-top: 20px; flex-wrap: wrap;
+  }
+  .page-button {
+    background-color: #fff; border: 1px solid #dee2e6; color: #495057; padding: 8px 0;
+    width: 40px; height: 38px; margin: 3px; border-radius: 6px; cursor: pointer;
+    font-size: 0.95em; transition: background-color 0.2s, border-color 0.2s, color 0.2s, box-shadow 0.2s;
+    text-align: center; position: relative; line-height: 1.2; display: inline-flex;
+    align-items: center; justify-content: center;
+  }
+  .page-button:hover:not(:disabled):not(.active) { background-color: #f8f9fa; border-color: #adb5bd; }
+  .page-button.active {
+    background-color: #0d6efd; border-color: #0d6efd; color: white; font-weight: 600;
+    cursor: default; box-shadow: 0 2px 4px rgba(13, 110, 253, 0.3);
+  }
+  .page-button.boundary {
+      font-weight: bold; padding: 8px 10px; width: auto; background-color: #f8f9fa;
+      border-color: #dee2e6; color: #6c757d;
+  }
+  .page-button.boundary:hover:not(:disabled) { background-color: #e9ecef; border-color: #adb5bd; color: #495057; }
+  .page-button.boundary:disabled { color: #adb5bd; cursor: not-allowed; background-color: #f8f9fa; border-color: #dee2e6; opacity: 0.6; }
+  .page-ellipsis { padding: 8px 5px; color: #6c757d; margin: 0 3px; display: inline-flex; align-items: center; }
+  .page-button.active .active-indicator { display: inline-block; margin-left: 3px; font-size: 0.6em; transform: translateY(1px); color: rgba(255, 255, 255, 0.9); }
+  
+  
+  /* --- Responsive Adjustments --- */
+  @media (max-width: 768px) {
+      .search-page-container { padding: 15px; }
+      .search-page-title { font-size: 1.5em; }
+      .result-location { font-size: 0.9em; }
+      .result-text { font-size: 0.95em; line-height: 1.6; }
+  }
+  
+  @media (max-width: 576px) {
+      .search-result-link { padding: 12px 15px; }
+      .search-page-nav { height: auto; /* Allow wrap */ }
+  }

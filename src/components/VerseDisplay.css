@@ -1,0 +1,86 @@
+/* src/components/VerseDisplay.css */
+
+.verse-display-loading {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+    font-style: italic;
+  }
+  
+  /* --- REMOVED .verse-display-chapter-title styles --- */
+  /*
+  .verse-display-chapter-title {
+      font-size: 1.6em;
+      color: #444;
+      margin-bottom: 20px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+  }
+  */
+  
+  
+  .verses-container {
+    /* Add top margin if needed, now that H2 is gone */
+    margin-top: 10px;
+    padding: 0 5px; /* Adjust horizontal padding */
+    line-height: 1.8;
+    font-size: 1.1em;
+    color: #333;
+  }
+  
+  .verse {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    border-radius: 4px; /* Add radius for highlight consistency */
+    padding: 4px 6px; /* Default padding */
+    margin-left: -6px; /* Compensate for padding */
+    margin-right: -6px;
+  }
+  
+  .verse-number {
+    font-weight: bold;
+    color: #3498db;
+    min-width: 25px;
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 0.85em;
+    position: relative;
+    top: -1px; /* Adjust vertical alignment */
+    text-align: right; /* Align numbers right if needed */
+  }
+  
+  .verse-number.clickable {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: #aaccff;
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+  .verse-number.clickable:hover {
+      color: #0056b3;
+       text-decoration-color: #0056b3;
+  }
+  
+  .verse-text {
+    flex: 1;
+  }
+  
+  /* Style for persistent highlight */
+  .verse.highlighted-persistent {
+    background-color: #d6eaff; /* Blue highlight */
+    /* padding, margin compensation are now default on .verse */
+  }
+  .verse.highlighted-persistent .verse-number {
+      color: #0056b3; /* Darker blue for highlighted number */
+      font-weight: bold;
+  }
+  
+  /* Responsive adjustments for verse text */
+  @media (max-width: 600px) {
+      .verses-container {
+          font-size: 1em;
+          line-height: 1.7;
+      }
+  }
