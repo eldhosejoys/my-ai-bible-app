@@ -15,7 +15,7 @@ const BookView = () => {
   const chapterIdParam = params.chapterId;
   const verseIdParam = params.verseId;
 
-  const { bibleData, bookTitles, isLoading: isDataLoading, error: dataError } = useBibleData();
+  const { bibleData, bookTitles, bibleHeadings, isLoading: isDataLoading, error: dataError } = useBibleData();
   const navigate = useNavigate();
 
   // State
@@ -26,6 +26,7 @@ const BookView = () => {
 
   const bookInfo = bookTitles.find(b => b.n.toString() === bookId);
   const totalChapters = bookInfo?.c || 0;
+  const chapterHeadings = bibleHeadings?.[bookId] || [];
 
   const currentBookIndex = bookTitles.findIndex(b => b.n.toString() === bookId);
   const prevBookExists = currentBookIndex > 0;
@@ -214,7 +215,8 @@ const BookView = () => {
              {viewMode === 'chapter' ? (
                 <VerseDisplay
                   bookId={bookId} chapterId={currentChapter} bibleData={bibleData}
-                  bookInfo={bookInfo} isLoading={isDataLoading} error={dataError}
+                  bookInfo={bookInfo} chapterHeadings={chapterHeadings}
+                  isLoading={isDataLoading} error={dataError}
                   highlightedVerse={highlightedVerse} onVerseClick={handleVerseClick}
                 />
               ) : ( <BookInfoDisplay bookInfo={bookInfo} /> )}
