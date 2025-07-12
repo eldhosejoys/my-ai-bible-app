@@ -14,8 +14,8 @@ const BooksDropdown = ({ bookTitles }) => {
 
   return (
     <div className="books-dropdown-container">
-      <button className="books-dropdown-button" onClick={() => setIsOpen(!isOpen)}>
-        Books
+      <button title="Books" className="books-dropdown-button" onClick={() => setIsOpen(!isOpen)}>
+      📖
       </button>
       {isOpen && (
         <div className="books-dropdown-menu">
