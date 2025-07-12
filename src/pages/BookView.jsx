@@ -26,6 +26,29 @@ const BookView = () => {
   const bookInfo = bookTitles.find(b => b.n.toString() === bookId);
   const totalChapters = bookInfo?.c || 0;
 
+  const currentBookIndex = bookTitles.findIndex(b => b.n.toString() === bookId);
+  const prevBookExists = currentBookIndex > 0;
+  const nextBookExists = currentBookIndex !== -1 && currentBookIndex < bookTitles.length - 1;
+
+  const navigateBook = useCallback((direction) => {
+    if (currentBookIndex === -1) return;
+
+    let nextBookIndex = -1;
+    if (direction === 'prev' && currentBookIndex > 0) {
+      nextBookIndex = currentBookIndex - 1;
+    } else if (direction === 'next' && currentBookIndex < bookTitles.length - 1) {
+      nextBookIndex = currentBookIndex + 1;
+    }
+
+    if (nextBookIndex !== -1) {
+      const nextBook = bookTitles[nextBookIndex];
+      // Navigate to the first chapter of the next/previous book
+      navigate(`/${nextBook.n}`, { replace: true });
+      // Reset state for the new book
+      setCurrentChapter(1); setHighlightedVerse(null); setViewMode('chapter');
+    }
+  }, [bookId, bookTitles, navigate, currentBookIndex]);
+
   // --- Effect 1: Set Chapter, Highlighted Verse from URL Path ---
   useEffect(() => {
     console.log("Effect 1: Processing URL Params");
@@ -107,7 +130,6 @@ const BookView = () => {
         return () => window.removeEventListener('keydown', handleKeyDown);
    }, [navigateChapter, viewMode]);
 
-
   // --- Render Logic ---
   if (isDataLoading || !isInitialLoadDone.current || currentChapter === null || !bookInfo) {
        if (dataError) { return <ErrorMessage message={dataError} />; }
@@ -143,11 +165,27 @@ const BookView = () => {
              <SearchBar initialQuery="" />
          </div>
 
-         {/* Main Title */}
-         <h1 className="book-view-title">
-             {bookInfo.bm}
-             {bookInfo.be && <span className="english-name"> ({bookInfo.be})</span>}
-         </h1>
+         {/* Book Title with Navigation */}
+         <div className="book-title-container">
+             {/* Previous Book Button */}
+             {prevBookExists && (
+             <button
+                 onClick={() => navigateBook('prev')} className="nav-button book-nav-button prev-book"
+                 title={prevBookExists ? bookTitles[currentBookIndex - 1].bm : ''} aria-label="Previous Book"
+             >←</button>)}
+
+             {/* Book Title */}
+             <h1 className="book-view-title">
+                 {bookInfo.bm} {/* Display main book name */}
+                 {bookInfo.be && <span className="english-name"> ({bookInfo.be})</span>}
+             </h1>
+             <button
+                 onClick={() => navigateBook('next')} className={`nav-button book-nav-button next-book ${!nextBookExists ? 'disabled' : ''}`} disabled={!nextBookExists}
+                 title={nextBookExists ? bookTitles[currentBookIndex + 1].bm : ''} aria-label="Next Book"
+             >→</button>
+
+
+         </div>
 
          {/* Current Chapter Indicator */}
          {viewMode === 'chapter' && currentChapter && (
