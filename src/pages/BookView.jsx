@@ -7,6 +7,7 @@ import VerseDisplay from '../components/VerseDisplay';
 import BookInfoDisplay from '../components/BookInfoDisplay';
 import SearchBar from '../components/SearchBar';
 import './BookView.css';
+import BooksDropdown from '../components/BooksDropdown';
 
 const BookView = () => {
   const params = useParams();
@@ -162,7 +163,11 @@ const BookView = () => {
                 </Link>
              </div>
              {/* Search Bar takes remaining space */}
+            
              <SearchBar initialQuery="" />
+             {/* Dropdown will appear below the button */}
+             <BooksDropdown bookTitles={bookTitles} />
+            
          </div>
 
          {/* Book Title with Navigation */}
