@@ -4,7 +4,7 @@ import ErrorMessage from './ErrorMessage';
 import './VerseDisplay.css'; // Ensure highlight styles exist here
 
 const VerseDisplay = ({
-    bookId, chapterId, bibleData, bookInfo, isLoading, error, highlightedVerse, onVerseClick
+    bookId, chapterId, bibleData, chapterHeadings, bookInfo, isLoading, error, highlightedVerse, onVerseClick
 }) => {
 
   const chapterVerses = bibleData?.[bookId]?.[chapterId] || [];
@@ -30,15 +30,35 @@ const VerseDisplay = ({
       {chapterVerses.map((verse) => {
         const isHighlighted = verse.v === highlightedVerse;
         const verseId = `verse-${bookId}-${chapterId}-${verse.v}`;
+        const headingForThisVerse = chapterHeadings.find(
+          (h) => h.c === chapterId && h.v === verse.v
+        );
+
+        console.log(headingForThisVerse)
         return (
-            <p key={verseId} id={verseId} className={`verse ${isHighlighted ? 'highlighted-persistent' : ''}`}>
-              <span
-                className="verse-number clickable" onClick={() => onVerseClick(verse.v)} role="button"
-                tabIndex="0" onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onVerseClick(verse.v);}}
-                aria-label={`Select verse ${verse.v}`}
-              >{verse.v}</span>
-              <span className="verse-text">{verse.t}</span>
-            </p>
+          <React.Fragment key={verseId}>
+          {headingForThisVerse && (
+            <div className="verse-heading">
+              {headingForThisVerse.t && <i><small>{headingForThisVerse.t}</small></i>}
+              <strong >{headingForThisVerse.h}</strong>
+              {headingForThisVerse.sh && <small>{headingForThisVerse.sh}</small>}
+            </div>
+          )}
+          <p id={verseId} className={`verse ${isHighlighted ? 'highlighted-persistent' : ''}`}>
+            <span
+              className="verse-number clickable"
+              onClick={() => onVerseClick(verse.v)}
+              role="button" tabIndex="0"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') onVerseClick(verse.v);
+              }}
+              aria-label={`Select verse ${verse.v}`}
+            >
+              {verse.v}
+            </span>
+            <span className="verse-text">{verse.t}</span>
+          </p>
+        </React.Fragment>
         );
        })}
     </div>
