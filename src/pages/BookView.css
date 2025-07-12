@@ -35,7 +35,7 @@
       display: flex;
       align-items: center;
       gap: 8px; /* Space between back and home buttons */
-      flex-shrink: 0; /* Prevent shrinking */
+ flex-shrink: 0; /* Prevent shrinking */
   }
   
   /* Generic styles for nav buttons in this top bar */
@@ -45,7 +45,7 @@
     justify-content: center;
     background: none;
     border: 1px solid #ccc;
-    color: #555;
+ color: #777; /* Slightly lighter than title */
     padding: 0 12px; /* Horizontal padding */
     height: 34px; /* Match height */
     border-radius: 5px;
@@ -56,8 +56,8 @@
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   }
   .book-view-top-bar .nav-button:hover {
-      background-color: #eee;
-      color: #333;
+ background-color: #f0f0f0;
+ color: #555;
       border-color: #bbb;
   }
 
@@ -81,13 +81,49 @@
        margin-bottom: 0;
   }
   
-  /* --- Book Title --- */
+  /* --- Book Navigation and Title Container --- */
+.book-title-container {
+ display: flex; /* Use flexbox for alignment */
+ align-items: center; /* Vertically center items */
+ justify-content: center; /* Center the content horizontally */
+ margin: 30px auto 5px; /* Top, horizontal, bottom margins */
+ position: relative; /* Needed for absolute positioning if title container was fixed/relative */
+ width: fit-content; /* Shrink to fit content to position buttons relative to title */
+}
+
+/* Style for the navigation buttons around the title */
+.book-nav-button {
+ background: none;
+ border: 1px solid #ddd; /* Slightly lighter border */
+ color: rgba(136, 136, 136, 0.7); /* Grey arrow color with transparency */
+ border-radius: 50%; /* Make them circular */
+ width: 36px; /* Adjust size to match chapter button circles */
+ height: 36px; /* Adjust size to match chapter button circles */
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 1.5em; /* Arrow size */
+ cursor: pointer;
+ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Small shadow */
+ transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
   .book-view-title {
-    text-align: center; color: #333; margin-top: 50px; /* Added margin top */
-    margin-bottom: 5px; font-size: 1.8em; font-weight: 600; line-height: 1.3;
+    text-align: center; color: #333; font-size: 1.8em; font-weight: 600; line-height: 1.3;
   }
   .book-view-title .english-name {
       font-weight: 300; color: #666; font-size: 0.85em; margin-left: 4px; white-space: nowrap;
+  }
+
+  /* Specific positioning for prev/next book buttons */
+  .book-nav-button.prev-book {
+      margin-right: 15px; /* Space between button and title */
+  }
+
+  .book-nav-button.next-book {
+      margin-left: 15px; /* Space between title and button */
+  }
+  .book-nav-button:hover {
+      background-color: #e9ecef; /* Match chapter button hover */
   }
   
   /* --- Current Chapter Indicator --- */
