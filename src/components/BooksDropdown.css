@@ -1,0 +1,45 @@
+.books-dropdown-container {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px; /* Adjust as needed for spacing */
+}
+
+.books-dropdown-button {
+  background-color: #f0f0f0; /* Similar to home button */
+  border: 1px solid #ccc;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 4px; /* Similar border-radius */
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.books-dropdown-button:hover {
+  background-color: #e0e0e0;
+}
+
+.books-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0; /* Position to the right of the button */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0;
+  margin: 5px 0 0 0;
+  z-index: 1000; /* Ensure it appears above other content */
+  max-height: 300px; /* Limit height for scrollability */
+  overflow-y: auto;
+}
+
+.books-dropdown-menu li {
+  padding: 10px 15px;
+  cursor: pointer;
+  white-space: nowrap; /* Prevent wrapping of titles */
+}
+
+.books-dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}
