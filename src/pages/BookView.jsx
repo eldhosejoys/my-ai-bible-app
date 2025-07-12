@@ -196,7 +196,7 @@ const BookView = () => {
 
          {/* Chapter Navigation Grid */}
           <div className="book-view-chapter-nav">
-              <button key="info" onClick={handleInfoSelect} className={`chapter-button info-button ${viewMode === 'info' ? 'active' : ''}`}>Info</button>
+              <button key="info" onClick={handleInfoSelect} className={`chapter-button info-button ${viewMode === 'info' ? 'active' : ''}`}>info</button>
              {chapters.map((chapterNum) => (
                 <button
                     key={chapterNum} onClick={() => handleChapterSelect(chapterNum)}
