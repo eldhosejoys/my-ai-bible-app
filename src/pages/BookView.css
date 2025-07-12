@@ -95,7 +95,7 @@
 .book-nav-button {
  background: none;
  border: 1px solid #ddd; /* Slightly lighter border */
- color: #888; /* Grey arrow color */
+ color: rgba(136, 136, 136, 0.7); /* Grey arrow color with transparency */
  border-radius: 50%; /* Make them circular */
  width: 36px; /* Adjust size to match chapter button circles */
  height: 36px; /* Adjust size to match chapter button circles */

@@ -29,6 +29,7 @@ const BookView = () => {
   const currentBookIndex = bookTitles.findIndex(b => b.n.toString() === bookId);
   const prevBookExists = currentBookIndex > 0;
   const nextBookExists = currentBookIndex !== -1 && currentBookIndex < bookTitles.length - 1;
+  const isLastBook = currentBookIndex === bookTitles.length - 1;
 
   const navigateBook = useCallback((direction) => {
     if (currentBookIndex === -1) return;
@@ -179,11 +180,12 @@ const BookView = () => {
                  {bookInfo.bm} {/* Display main book name */}
                  {bookInfo.be && <span className="english-name"> ({bookInfo.be})</span>}
              </h1>
+             {!isLastBook && (
              <button
                  onClick={() => navigateBook('next')} className={`nav-button book-nav-button next-book ${!nextBookExists ? 'disabled' : ''}`} disabled={!nextBookExists}
-                 title={nextBookExists ? bookTitles[currentBookIndex + 1].bm : ''} aria-label="Next Book"
+                 title={nextBookExists ? bookTitles[currentBookIndex + 1].bm : ''} aria-label={isLastBook ? 'Last Book' : 'Next Book'} disabled={isLastBook}
              >→</button>
-
+             )}
 
          </div>
 
