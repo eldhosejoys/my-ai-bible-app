@@ -34,14 +34,13 @@ const SettingsPanel = () => {
 
       {isOpen && (
         <div className="settings-panel-card">
-          <h3>Settings</h3>
+          <DarkModeToggle />
           <div className="button-row">
             <ClearCacheButton />
             <RefreshDataButton />
-           
           </div> 
           <RandomVerseButton />
-          <DarkModeToggle />
+         
         </div>
       )}
     </div>

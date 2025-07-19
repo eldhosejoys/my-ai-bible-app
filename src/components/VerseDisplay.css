@@ -76,7 +76,7 @@
   
   /* Style for persistent highlight */
   .verse.highlighted-persistent {
-    background-color: #d6eaff; /* Blue highlight */
+    background-color: var(--text-highlight-background); /* Blue highlight */
     /* padding, margin compensation are now default on .verse */
   }
   .verse.highlighted-persistent .verse-number {
