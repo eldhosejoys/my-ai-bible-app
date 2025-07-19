@@ -9,6 +9,7 @@ import SearchBar from '../components/SearchBar';
 import './BookView.css';
 import BooksDropdown from '../components/BooksDropdown';
 import SettingsPanel from '../components/SettingsPanel'; // Import SettingsPanel
+import FloatingNav from '../components/FloatingNav';
 
 const BookView = () => {
   const params = useParams();
@@ -16,11 +17,11 @@ const BookView = () => {
   const chapterIdParam = params.chapterId;
   const verseIdParam = params.verseId;
 
-  const { 
-    bibleData, 
-    bookTitles, 
-    bibleHeadings, 
-    isLoading: isDataLoading, 
+  const {
+    bibleData,
+    bookTitles,
+    bibleHeadings,
+    isLoading: isDataLoading,
     isBibleLoading,
     error: dataError,
     loadBibleData
@@ -32,6 +33,7 @@ const BookView = () => {
   const [highlightedVerse, setHighlightedVerse] = useState(null);
   const [viewMode, setViewMode] = useState('chapter');
   const isInitialLoadDone = useRef(false);
+  const [isFloatingNavVisible, setIsFloatingNavVisible] = useState(false);
 
   useEffect(() => {
     // If the main bible data isn't loaded yet, load it.
@@ -91,75 +93,91 @@ const BookView = () => {
 
   // --- Effect 2: Scroll to Highlighted Verse (if any) ---
   useEffect(() => {
-     console.log(`Effect 2: Check scroll. InitialDone: ${isInitialLoadDone.current}, Mode: ${viewMode}, Chapter: ${currentChapter}, Highlight: ${highlightedVerse}`);
-     if (isInitialLoadDone.current && viewMode === 'chapter' && currentChapter !== null && highlightedVerse !== null) {
-        const scrollTimer = setTimeout(() => {
-            const verseId = `verse-${bookId}-${currentChapter}-${highlightedVerse}`;
-            const verseElement = document.getElementById(verseId);
-            if (verseElement) {
-                console.log(`Effect 2: Scrolling to ${verseId}`);
-                const rect = verseElement.getBoundingClientRect();
-                const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-                if (!isVisible) { verseElement.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
-                else { console.log(`Effect 2: Verse ${verseId} already visible.`); }
-            } else { console.warn(`Effect 2: Verse element not found for scrolling: ${verseId}`); }
-        }, 250);
-        return () => clearTimeout(scrollTimer);
-      }
+    console.log(`Effect 2: Check scroll. InitialDone: ${isInitialLoadDone.current}, Mode: ${viewMode}, Chapter: ${currentChapter}, Highlight: ${highlightedVerse}`);
+    if (isInitialLoadDone.current && viewMode === 'chapter' && currentChapter !== null && highlightedVerse !== null) {
+      const scrollTimer = setTimeout(() => {
+        const verseId = `verse-${bookId}-${currentChapter}-${highlightedVerse}`;
+        const verseElement = document.getElementById(verseId);
+        if (verseElement) {
+          console.log(`Effect 2: Scrolling to ${verseId}`);
+          const rect = verseElement.getBoundingClientRect();
+          const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+          if (!isVisible) { verseElement.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+          else { console.log(`Effect 2: Verse ${verseId} already visible.`); }
+        } else { console.warn(`Effect 2: Verse element not found for scrolling: ${verseId}`); }
+      }, 250);
+      return () => clearTimeout(scrollTimer);
+    }
   }, [highlightedVerse, currentChapter, bookId, viewMode]);
+
+  // --- Effect 3: Handle Scroll to show floating nav ---
+  useEffect(() => {
+    const handleScroll = () => {
+      const titleContainer = document.querySelector('.book-title-container');
+      if (titleContainer) {
+        const rect = titleContainer.getBoundingClientRect();
+        setIsFloatingNavVisible(rect.bottom < 0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check on mount
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
 
   // --- Handlers (Keep as is) ---
   const handleChapterSelect = (chapterNum) => {
-      if (chapterNum !== currentChapter || viewMode !== 'chapter') {
-        setCurrentChapter(chapterNum); setViewMode('chapter'); setHighlightedVerse(null);
-        navigate(`/${bookId}/${chapterNum}`, { replace: true });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (chapterNum !== currentChapter || viewMode !== 'chapter') {
+      setCurrentChapter(chapterNum); setViewMode('chapter'); setHighlightedVerse(null);
+      navigate(`/${bookId}/${chapterNum}`, { replace: true });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
   const handleInfoSelect = () => {
     if (viewMode !== 'info') { setViewMode('info'); setHighlightedVerse(null); window.scrollTo({ top: 0, behavior: 'smooth' }); }
   };
-   const handleVerseClick = (verseNum) => {
-      const newHighlightedVerse = verseNum === highlightedVerse ? null : verseNum;
-      setHighlightedVerse(newHighlightedVerse);
-      if (newHighlightedVerse) { navigate(`/${bookId}/${currentChapter}/${newHighlightedVerse}`, { replace: true }); }
-      else { navigate(`/${bookId}/${currentChapter}`, { replace: true }); }
-   };
+  const handleVerseClick = (verseNum) => {
+    const newHighlightedVerse = verseNum === highlightedVerse ? null : verseNum;
+    setHighlightedVerse(newHighlightedVerse);
+    if (newHighlightedVerse) { navigate(`/${bookId}/${currentChapter}/${newHighlightedVerse}`, { replace: true }); }
+    else { navigate(`/${bookId}/${currentChapter}`, { replace: true }); }
+  };
   const navigateChapter = useCallback((direction) => {
-      if (viewMode !== 'chapter' || currentChapter === null) return;
-      let nextChap = currentChapter;
-      if (direction === 'prev' && currentChapter > 1) nextChap = currentChapter - 1;
-      else if (direction === 'next' && currentChapter < totalChapters) nextChap = currentChapter + 1;
-      if (nextChap !== currentChapter) {
-        setCurrentChapter(nextChap); setHighlightedVerse(null);
-        navigate(`/${bookId}/${nextChap}`, { replace: true });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
+    if (viewMode !== 'chapter' || currentChapter === null) return;
+    let nextChap = currentChapter;
+    if (direction === 'prev' && currentChapter > 1) nextChap = currentChapter - 1;
+    else if (direction === 'next' && currentChapter < totalChapters) nextChap = currentChapter + 1;
+    if (nextChap !== currentChapter) {
+      setCurrentChapter(nextChap); setHighlightedVerse(null);
+      navigate(`/${bookId}/${nextChap}`, { replace: true });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }, [currentChapter, totalChapters, viewMode, navigate, bookId]);
   useEffect(() => {
-        const handleKeyDown = (event) => {
-        if (viewMode === 'chapter') {
-            if (event.key === 'ArrowLeft') navigateChapter('prev');
-            else if (event.key === 'ArrowRight') navigateChapter('next');
-        }
-        };
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-   }, [navigateChapter, viewMode]);
+    const handleKeyDown = (event) => {
+      if (viewMode === 'chapter') {
+        if (event.key === 'ArrowLeft') navigateChapter('prev');
+        else if (event.key === 'ArrowRight') navigateChapter('next');
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [navigateChapter, viewMode]);
 
   // --- Render Logic ---
   if (isDataLoading || !isInitialLoadDone.current || currentChapter === null || !bookInfo || isBibleLoading) {
-       if (dataError) { return <ErrorMessage message={dataError} />; }
-       return <LoadingSpinner />;
+    if (dataError) { return <ErrorMessage message={dataError} />; }
+    return <LoadingSpinner />;
   }
   if (isNaN(currentChapter) || currentChapter < 1 || currentChapter > totalChapters) {
-      return (
-          <div className="book-view-container error-page">
-              <ErrorMessage message={`Invalid chapter number: ${currentChapter}.`} />
-              <Link to={`/${bookId}`} className="nav-button home-button" style={{marginTop: '15px'}}>Go to Chapter 1</Link>
-          </div>
-      );
+    return (
+      <div className="book-view-container error-page">
+        <ErrorMessage message={`Invalid chapter number: ${currentChapter}.`} />
+        <Link to={`/${bookId}`} className="nav-button home-button" style={{ marginTop: '15px' }}>Go to Chapter 1</Link>
+      </div>
+    );
   }
 
   const chapters = Array.from({ length: totalChapters }, (_, i) => i + 1);
@@ -167,86 +185,91 @@ const BookView = () => {
   const nextChapterExists = viewMode === 'chapter' && currentChapter < totalChapters;
 
   return (
-      <div className="book-view-container">
-         {/* Top Bar */}
-         <div className="book-view-top-bar">
-             {/* Group Nav Buttons */}
-             <div className="page-navigation-controls">
-                <button onClick={() => navigate(-1)} className="nav-button back-button" title="Back">
-                   ←
-                </button>
-                <Link to="/" className="nav-button home-button" title="Home" aria-label="Go to Home">
-                    🏠
-                </Link>
-             </div>
-             {/* Search Bar takes remaining space */}
-            
-             <SearchBar initialQuery="" />
-             {/* Dropdown will appear below the button */}
-             <div>
-             <SettingsPanel/>
-             <BooksDropdown bookTitles={bookTitles} />
-             </div>
-            
-            
-         </div>
+    <div className="book-view-container">
+      {/* Floating Nav */}
+      {isFloatingNavVisible && (
+        <FloatingNav bookTitle={bookInfo.bm} chapter={currentChapter} />
+      )}
 
-         {/* Book Title with Navigation */}
-         <div className="book-title-container">
-             {/* Previous Book Button */}
-             {prevBookExists && (
-             <button
-                 onClick={() => navigateBook('prev')} className="nav-button book-nav-button prev-book"
-                 title={prevBookExists ? bookTitles[currentBookIndex - 1].bm : ''} aria-label="Previous Book"
-             >←</button>)}
+      {/* Top Bar */}
+      <div className="book-view-top-bar">
+        {/* Group Nav Buttons */}
+        <div className="page-navigation-controls">
+          <button onClick={() => navigate(-1)} className="nav-button back-button" title="Back">
+            ←
+          </button>
+          <Link to="/" className="nav-button home-button" title="Home" aria-label="Go to Home">
+            🏠
+          </Link>
+        </div>
+        {/* Search Bar takes remaining space */}
 
-             {/* Book Title */}
-             <h1 className="book-view-title">
-                 {bookInfo.bm} {/* Display main book name */}
-                 {bookInfo.be && <span className="english-name"> ({bookInfo.be})</span>}
-             </h1>
-             {nextBookExists && (
-             <button
-                 onClick={() => navigateBook('next')} className="nav-button book-nav-button next-book"
-                 title={nextBookExists ? bookTitles[currentBookIndex + 1].bm : ''} aria-label="Next Book"
-             >→</button>
-             )}
+        <SearchBar initialQuery="" />
+        {/* Dropdown will appear below the button */}
+        <div>
+          <SettingsPanel />
+          <BooksDropdown bookTitles={bookTitles} />
+        </div>
 
-         </div>
 
-         {/* Current Chapter Indicator */}
-         {viewMode === 'chapter' && currentChapter && (
-            <h2 className="current-chapter-indicator">Chapter {currentChapter}</h2>
-         )}
+      </div>
 
-         {/* Chapter Navigation Grid */}
-          <div className="book-view-chapter-nav">
-              <button key="info" onClick={handleInfoSelect} className={`chapter-button info-button ${viewMode === 'info' ? 'active' : ''}`}>info</button>
-             {chapters.map((chapterNum) => (
-                <button
-                    key={chapterNum} onClick={() => handleChapterSelect(chapterNum)}
-                    className={`chapter-button ${viewMode === 'chapter' && chapterNum === currentChapter ? 'active' : ''}`}
-                >{chapterNum}</button>
-             ))}
-         </div>
+      {/* Book Title with Navigation */}
+      <div className="book-title-container">
+        {/* Previous Book Button */}
+        {prevBookExists && (
+          <button
+            onClick={() => navigateBook('prev')} className="nav-button book-nav-button prev-book"
+            title={prevBookExists ? bookTitles[currentBookIndex - 1].bm : ''} aria-label="Previous Book"
+          >←</button>)}
 
-         {/* Main Content Area */}
-          <div key={`content-${currentChapter}-${viewMode}`} className="main-content-area">
-             {viewMode === 'chapter' ? (
-                <VerseDisplay
-                  bookId={bookId} chapterId={currentChapter} bibleData={bibleData}
-                  bookInfo={bookInfo} chapterHeadings={chapterHeadings}
-                  isLoading={isDataLoading || isBibleLoading} error={dataError}
-                  highlightedVerse={highlightedVerse} onVerseClick={handleVerseClick}
-                />
-              ) : ( <BookInfoDisplay bookInfo={bookInfo} /> )}
-          </div>
+        {/* Book Title */}
+        <h1 className="book-view-title">
+          {bookInfo.bm} {/* Display main book name */}
+          {bookInfo.be && <span className="english-name"> ({bookInfo.be})</span>}
+        </h1>
+        {nextBookExists && (
+          <button
+            onClick={() => navigateBook('next')} className="nav-button book-nav-button next-book"
+            title={nextBookExists ? bookTitles[currentBookIndex + 1].bm : ''} aria-label="Next Book"
+          >→</button>
+        )}
 
-         {/* Side Nav */}
-         {prevChapterExists && ( <button className="side-nav-button prev-button" onClick={() => navigateChapter('prev')} disabled={viewMode !== 'chapter'}>←</button> )}
-         {nextChapterExists && ( <button className="side-nav-button next-button" onClick={() => navigateChapter('next')} disabled={viewMode !== 'chapter'}>→</button> )}
-     </div>
-   );
+      </div>
+
+      {/* Current Chapter Indicator */}
+      {viewMode === 'chapter' && currentChapter && (
+        <h2 className="current-chapter-indicator">അദ്ധ്യായം {currentChapter}</h2>
+      )}
+
+      {/* Chapter Navigation Grid */}
+      <div className="book-view-chapter-nav">
+        <button key="info" onClick={handleInfoSelect} className={`chapter-button info-button ${viewMode === 'info' ? 'active' : ''}`}>info</button>
+        {chapters.map((chapterNum) => (
+          <button
+            key={chapterNum} onClick={() => handleChapterSelect(chapterNum)}
+            className={`chapter-button ${viewMode === 'chapter' && chapterNum === currentChapter ? 'active' : ''}`}
+          >{chapterNum}</button>
+        ))}
+      </div>
+
+      {/* Main Content Area */}
+      <div key={`content-${currentChapter}-${viewMode}`} className="main-content-area">
+        {viewMode === 'chapter' ? (
+          <VerseDisplay
+            bookId={bookId} chapterId={currentChapter} bibleData={bibleData}
+            bookInfo={bookInfo} chapterHeadings={chapterHeadings}
+            isLoading={isDataLoading || isBibleLoading} error={dataError}
+            highlightedVerse={highlightedVerse} onVerseClick={handleVerseClick}
+          />
+        ) : (<BookInfoDisplay bookInfo={bookInfo} />)}
+      </div>
+
+      {/* Side Nav */}
+      {prevChapterExists && (<button className="side-nav-button prev-button" onClick={() => navigateChapter('prev')} disabled={viewMode !== 'chapter'}>←</button>)}
+      {nextChapterExists && (<button className="side-nav-button next-button" onClick={() => navigateChapter('next')} disabled={viewMode !== 'chapter'}>→</button>)}
+    </div>
+  );
 };
 
 export default BookView;
