@@ -6,8 +6,9 @@
 }
 
 .dark-mode-label {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--text-color);
+  font-weight: bold;
 }
 
 .toggle-button {

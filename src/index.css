@@ -8,11 +8,11 @@
   -webkit-text-size-adjust: 100%;
 
   /* Light mode variables */
-  --background-color: #f9f9f9;
+  --background-color: #f7f6f6;
   --text-color: #213547;
   --card-background: #ffffff;
   --border-color: #e0e0e0;
-  --button-background: #f0f0f0;
+  --button-background: #ffffff;
   --button-hover-background: #e0e0e0;
 }
 

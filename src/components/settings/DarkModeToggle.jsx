@@ -26,7 +26,7 @@ const DarkModeToggle = () => {
 
   return (
     <div className="dark-mode-toggle" onClick={(e) => e.stopPropagation()}>
-      <span className="dark-mode-label">Dark Mode</span>
+      <span className="dark-mode-label">Dark Mode:</span>
       <button className="toggle-button" onClick={toggleDarkMode}>
         <span className={`slider ${isDarkMode ? 'on' : 'off'}`}></span>
       </button>
