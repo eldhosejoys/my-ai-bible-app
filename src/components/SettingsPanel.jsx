@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './SettingsPanel.css';
 import ClearCacheButton from './settings/ClearCacheButton';
 import RefreshDataButton from './settings/RefreshDataButton';
+import RandomVerseButton from './settings/RandomVerseButton';
 
 const SettingsPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,8 +34,11 @@ const SettingsPanel = () => {
       {isOpen && (
         <div className="settings-panel-card">
           <h3>Settings</h3>
-          <ClearCacheButton />
-          <RefreshDataButton />
+          <div className="button-row">
+            <ClearCacheButton />
+            <RefreshDataButton />
+           
+          </div> <RandomVerseButton />
         </div>
       )}
     </div>

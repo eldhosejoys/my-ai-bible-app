@@ -94,8 +94,16 @@ export function useBibleData() {
             setBookTitles(titlesJson);
             setBibleHeadings(headingsJson);
 
-            await setInDB(CACHE_KEY_TITLES, titlesJson);
-            await setInDB(CACHE_KEY_HEADINGS, headingsJson);
+            const cachedTitles = await getFromDB(CACHE_KEY_TITLES);
+            if (!cachedTitles || forceRefresh) {
+                await setInDB(CACHE_KEY_TITLES, titlesJson);
+            }
+
+            const cachedHeadings = await getFromDB(CACHE_KEY_HEADINGS);
+            if (!cachedHeadings || forceRefresh) {
+                await setInDB(CACHE_KEY_HEADINGS, headingsJson);
+            }
+
             await setInDB(CACHE_KEY_TIMESTAMP, now);
             console.log("Initial data cached successfully in IndexedDB.");
 
@@ -108,9 +116,6 @@ export function useBibleData() {
     }, []);
 
     const loadBibleData = useCallback(async () => {
-        if (bibleData) {
-            return; // Already loaded
-        }
         setIsBibleLoading(true);
         setError(null);
 
@@ -135,7 +140,12 @@ export function useBibleData() {
             const bibleJson = await bibleResponse.json();
             const structuredData = structureBibleData(bibleJson);
             setBibleData(structuredData);
+
+            // const existingBibleData = await getFromDB(CACHE_KEY_BIBLE);
+            // if (!existingBibleData) {
             await setInDB(CACHE_KEY_BIBLE, structuredData);
+            // }
+
             console.log("Bible data cached successfully in IndexedDB.");
 
         } catch (err) {
@@ -144,7 +154,7 @@ export function useBibleData() {
         } finally {
             setIsBibleLoading(false);
         }
-    }, [bibleData]);
+    }, []);
 
 
     useEffect(() => {
@@ -153,6 +163,7 @@ export function useBibleData() {
 
     const refreshData = () => {
         loadInitialData(true);
+        loadBibleData();
     };
 
     return { bibleData, bookTitles, bibleHeadings, isLoading, isBibleLoading, error, refreshData, loadBibleData };
