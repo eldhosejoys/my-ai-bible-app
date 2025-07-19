@@ -29,7 +29,7 @@ body {
 body.dark-mode {
   /* Dark mode variables */
   --background-color: #292828;
-  --text-color: #e7e7e7;
+  --text-color: #f1f1f1;
   --card-background: #313131;
   --border-color: #696969;
   --button-background: #2a2a2a;
