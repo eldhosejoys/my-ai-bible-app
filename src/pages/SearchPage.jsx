@@ -12,48 +12,90 @@ import '../components/Pagination.css';
 const RESULTS_PER_PAGE = 100;
 
 const SearchPage = () => {
-  const { bibleData, bookTitles, isLoading: isDataLoading, error: dataError } = useBibleData();
+  const {
+    bibleData,
+    bookTitles,
+    isLoading: isDataLoading, // for initial titles/headings
+    isBibleLoading,         // for full bible text
+    error: dataError,
+    loadBibleData             // function to load bible text
+  } = useBibleData();
+  
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  // Derive state directly from URL where possible
   const query = useMemo(() => searchParams.get('q') || '', [searchParams]);
   const currentPage = useMemo(() => {
       const page = parseInt(searchParams.get('page') || '1', 10);
       return page > 0 ? page : 1;
   }, [searchParams]);
 
-  // State for results and loading/error status
   const [searchResults, setSearchResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState('');
 
+  // Effect to trigger data loading if a query is present
+  useEffect(() => {
+    if (query.trim() && !bibleData) {
+      loadBibleData();
+    }
+  }, [query, bibleData, loadBibleData]);
+
   // --- Search Execution Logic ---
   const executeSearch = useCallback((term) => {
     const trimmedTerm = term.trim();
-    if (!trimmedTerm) { setSearchResults([]); setIsSearching(false); setSearchError(''); return; }
-    if (!bibleData || !bookTitles.length) { if (!isDataLoading) setSearchError('Bible data not yet available.'); setIsSearching(false); return; }
-    setIsSearching(true); setSearchError(''); setSearchResults([]);
+    if (!trimmedTerm || !bibleData || !bookTitles.length) {
+      setSearchResults([]);
+      setIsSearching(false);
+      setSearchError('');
+      return;
+    }
+
+    setIsSearching(true);
+    setSearchError('');
+    setSearchResults([]);
+
     setTimeout(() => {
-        const lowerTerm = trimmedTerm.toLowerCase(); const results = [];
+        const lowerTerm = trimmedTerm.toLowerCase();
+        const results = [];
         try {
             for (const bookId in bibleData) {
-                 const bookInfo = bookTitles.find(b => b.n.toString() === bookId); if (!bookInfo) continue;
-                 for (const chapterId in bibleData[bookId]) {
+                const bookInfo = bookTitles.find(b => b.n.toString() === bookId);
+                if (!bookInfo) continue;
+                for (const chapterId in bibleData[bookId]) {
                     for (const verse of bibleData[bookId][chapterId]) {
-                        if (verse.t && verse.t.toLowerCase().includes(lowerTerm)) { results.push({ b: bookId, c: chapterId, v: verse.v, t: verse.t, bookName: bookInfo.bm }); } } } }
-            if (results.length === 0) setSearchError(`No results found for "${trimmedTerm}".`); else setSearchError('');
+                        if (verse.t && verse.t.toLowerCase().includes(lowerTerm)) {
+                            results.push({ b: bookId, c: chapterId, v: verse.v, t: verse.t, bookName: bookInfo.bm });
+                        }
+                    }
+                }
+            }
+            if (results.length === 0) {
+                setSearchError(`No results found for "${trimmedTerm}".`);
+            } else {
+                setSearchError('');
+            }
             setSearchResults(results);
-        } catch (err) { setSearchError("Search error."); setSearchResults([]); }
-        finally { setIsSearching(false); }
+        } catch (err) {
+            console.error("Search error:", err);
+            setSearchError("An error occurred during the search.");
+            setSearchResults([]);
+        }
+        finally {
+            setIsSearching(false);
+        }
     }, 50);
-  }, [bibleData, bookTitles, isDataLoading]);
+  }, [bibleData, bookTitles]);
 
-  // --- Effect to Trigger Search When URL 'q' Changes ---
+  // Effect to trigger the search itself when data is ready
   useEffect(() => {
-    const queryFromUrl = searchParams.get('q') || '';
-    executeSearch(queryFromUrl);
-  }, [searchParams, executeSearch]); // Depends only on URL params and the stable search function
+    if (query.trim() && bibleData) {
+      executeSearch(query);
+    } else if (!query.trim()) {
+        setSearchResults([]);
+        setSearchError('');
+    }
+  }, [query, bibleData, executeSearch]);
 
   // --- Pagination Logic ---
   const totalResults = searchResults.length;
@@ -73,33 +115,30 @@ const SearchPage = () => {
             return newParams;
         }, { replace: true });
         const resultsContainer = document.querySelector('.search-results-container h2');
-        if (resultsContainer) { resultsContainer.scrollIntoView({ behavior: 'instant', block: 'start' }); }
+        if (resultsContainer) {
+            resultsContainer.scrollIntoView({ behavior: 'instant', block: 'start' });
+        }
     }
   };
 
   // --- Render Logic ---
-  const showLoadingIndicator = isSearching || (isDataLoading && query && !searchResults.length);
+  const showLoadingIndicator = isSearching || isBibleLoading || (isDataLoading && query);
 
   return (
     <div className="search-page-container">
-       {/* Navigation Controls */}
        <div className="search-page-nav">
-            {/* Always show back button */}
             <button onClick={() => navigate(-1)} className="nav-button back-button" title="Back">
                 ←
             </button>
-            {/* Always show home button */}
             <Link to="/" className="nav-button home-button" title="Home" aria-label="Go to Home">
                 🏠
             </Link>
        </div>
 
-       {/* Search Bar */}
        <SearchBar initialQuery={query}/>
 
       <h1 className="search-page-title">Search Results</h1>
 
-      {/* Loading / Error States */}
       {showLoadingIndicator && <LoadingSpinner />}
       {!showLoadingIndicator && dataError && <ErrorMessage message={dataError} />}
 
@@ -109,7 +148,6 @@ const SearchPage = () => {
             <p className="search-prompt">Enter a term in the search bar above to find verses.</p>
         )}
 
-        {/* Results List and Pagination */}
         {currentResults.length > 0 && !isSearching && (
           <div className="search-results-container">
             <h2>Results for "{query}" ({totalResults} found):</h2>
