@@ -8,7 +8,7 @@ import './Home.css';                                   // Styles for the Home pa
 
 const Home = () => {
   // Fetch book titles and data loading status/errors
-  const { bookTitles, isLoading: isDataLoading, error: dataError, refreshData } = useBibleData();
+  const { bookTitles, isLoading: isDataLoading, error: dataError } = useBibleData();
 
   // --- Render Logic ---
 
@@ -51,14 +51,6 @@ const Home = () => {
       )}
       {/* --- End Book Grid Section --- */}
 
-
-      {/* --- Refresh Button Container (Moved to Bottom) --- */}
-      <div className="home-refresh-container">
-         <button onClick={refreshData} disabled={isDataLoading} className="refresh-button">
-            {isDataLoading ? 'Refreshing...' : 'Refresh Data'}
-         </button>
-      </div>
-      {/* --- End Refresh Button --- */}
 
     </div>
   );
