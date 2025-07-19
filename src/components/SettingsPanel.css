@@ -47,6 +47,12 @@
   gap: 8px; /* optional: space between buttons */
 }
 
+.button-row {
+  display: flex;
+  align-items: center; /* optional: vertically center buttons */
+  gap: 8px; /* optional: space between buttons */
+}
+
 @media (max-width: 507px) {
   .settings-panel-card {
     left: 0;

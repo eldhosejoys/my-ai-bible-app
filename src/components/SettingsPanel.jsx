@@ -40,7 +40,6 @@ const SettingsPanel = () => {
             <RefreshDataButton />
           </div> 
           <RandomVerseButton />
-         
         </div>
       )}
     </div>
