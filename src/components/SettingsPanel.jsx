@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './SettingsPanel.css';
+import ClearCacheButton from './settings/ClearCacheButton';
 
 const SettingsPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,7 @@ const SettingsPanel = () => {
       {isOpen && (
         <div className="settings-panel-card">
           <h3>Settings</h3>
-          <p>More settings coming soon!</p>
+          <ClearCacheButton />
         </div>
       )}
     </div>

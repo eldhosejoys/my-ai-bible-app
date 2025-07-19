@@ -61,16 +61,44 @@ export const setInDB = async (key, value) => {
 };
 
 export const clearDB = async () => {
-    const db = await openDB();
+    // Close the database connection before attempting to delete
+    if (db) {
+        db.close();
+        db = null;
+    }
+
     return new Promise((resolve, reject) => {
-        const transaction = db.transaction([STORE_NAME], 'readwrite');
-        const store = transaction.objectStore(STORE_NAME);
-        const request = store.clear();
+        const request = indexedDB.deleteDatabase(DB_NAME);
+
         request.onsuccess = () => {
-            resolve();
+            console.log('IndexedDB deleted successfully');
+            localStorage.clear();
+            console.log('LocalStorage cleared successfully');
+
+            // Attempt to unregister service workers
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then((registrations) => {
+                    for (const registration of registrations) {
+                        registration.unregister();
+                        console.log('Service worker unregistered', registration);
+                    }
+                    resolve();
+                }).catch((error) => {
+                    console.error('Service worker unregistration failed:', error);
+                    resolve(); // Resolve even if unregistration fails
+                });
+            } else {
+                resolve();
+            }
         };
+
         request.onerror = (event) => {
-            reject('Error clearing DB: ' + event.target.errorCode);
+            reject('Error deleting IndexedDB: ' + event.target.errorCode);
+        };
+
+        request.onblocked = () => {
+            console.warn('IndexedDB deletion blocked. Close other tabs.');
+            reject('IndexedDB deletion blocked.');
         };
     });
 };
