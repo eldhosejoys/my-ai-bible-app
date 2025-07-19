@@ -8,7 +8,7 @@
 .books-dropdown-button {
   background-color: #ffffff;
   border: 1px solid #d1d5db;
-  padding: 10px 18px;
+  padding: 8px 12px;
   cursor: pointer;
   border-radius: 8px;
   font-size: 1rem;
@@ -73,7 +73,7 @@
 }
 
 
-@media (max-width: 471px) {
+@media (max-width: 507px) {
   .books-dropdown-menu {
     left: 0;
     right: auto;
