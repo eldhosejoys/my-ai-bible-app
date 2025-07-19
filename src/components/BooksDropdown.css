@@ -71,3 +71,11 @@
   background-color: #f3f4f6;
   color: #1f2937;
 }
+
+
+@media (max-width: 471px) {
+  .books-dropdown-menu {
+    left: 0;
+    right: auto;
+  }
+}
