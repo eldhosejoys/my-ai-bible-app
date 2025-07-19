@@ -16,7 +16,15 @@ const BookView = () => {
   const chapterIdParam = params.chapterId;
   const verseIdParam = params.verseId;
 
-  const { bibleData, bookTitles, bibleHeadings, isLoading: isDataLoading, error: dataError } = useBibleData();
+  const { 
+    bibleData, 
+    bookTitles, 
+    bibleHeadings, 
+    isLoading: isDataLoading, 
+    isBibleLoading,
+    error: dataError,
+    loadBibleData
+  } = useBibleData();
   const navigate = useNavigate();
 
   // State
@@ -24,6 +32,13 @@ const BookView = () => {
   const [highlightedVerse, setHighlightedVerse] = useState(null);
   const [viewMode, setViewMode] = useState('chapter');
   const isInitialLoadDone = useRef(false);
+
+  useEffect(() => {
+    // If the main bible data isn't loaded yet, load it.
+    if (!bibleData) {
+      loadBibleData();
+    }
+  }, [bibleData, loadBibleData]);
 
   const bookInfo = bookTitles.find(b => b.n.toString() === bookId);
   const totalChapters = bookInfo?.c || 0;
@@ -134,7 +149,7 @@ const BookView = () => {
    }, [navigateChapter, viewMode]);
 
   // --- Render Logic ---
-  if (isDataLoading || !isInitialLoadDone.current || currentChapter === null || !bookInfo) {
+  if (isDataLoading || !isInitialLoadDone.current || currentChapter === null || !bookInfo || isBibleLoading) {
        if (dataError) { return <ErrorMessage message={dataError} />; }
        return <LoadingSpinner />;
   }
@@ -221,7 +236,7 @@ const BookView = () => {
                 <VerseDisplay
                   bookId={bookId} chapterId={currentChapter} bibleData={bibleData}
                   bookInfo={bookInfo} chapterHeadings={chapterHeadings}
-                  isLoading={isDataLoading} error={dataError}
+                  isLoading={isDataLoading || isBibleLoading} error={dataError}
                   highlightedVerse={highlightedVerse} onVerseClick={handleVerseClick}
                 />
               ) : ( <BookInfoDisplay bookInfo={bookInfo} /> )}
