@@ -8,6 +8,7 @@ import BookInfoDisplay from '../components/BookInfoDisplay';
 import SearchBar from '../components/SearchBar';
 import './BookView.css';
 import BooksDropdown from '../components/BooksDropdown';
+import SettingsPanel from '../components/SettingsPanel'; // Import SettingsPanel
 
 const BookView = () => {
   const params = useParams();
@@ -167,7 +168,11 @@ const BookView = () => {
             
              <SearchBar initialQuery="" />
              {/* Dropdown will appear below the button */}
+             <div>
+             <SettingsPanel/>
              <BooksDropdown bookTitles={bookTitles} />
+             </div>
+            
             
          </div>
 
