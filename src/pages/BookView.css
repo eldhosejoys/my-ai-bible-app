@@ -226,7 +226,7 @@
       /* Top bar might need responsive adjustments */
       .book-view-chapter-nav { padding: 10px 0; gap: 6px; margin-bottom: 25px; }
       .book-view-container {
-        background-color: #fdfdfd;
+        background-color: var(--card-background);
         border-radius: 0;
         box-shadow: none;
 
