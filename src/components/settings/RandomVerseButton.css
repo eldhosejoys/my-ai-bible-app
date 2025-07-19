@@ -1,5 +1,5 @@
-.refresh-data-button {
-  background-color: #3f93ee; /* Bootstrap primary blue */
+.random-verse-button {
+  background-color: #4ac573; /* Bootstrap primary blue */
   color: white;
   padding: 10px 15px;
   border: none;
@@ -11,6 +11,6 @@
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.refresh-data-button:hover {
-  background-color: #0056b3;
+.random-verse-button:hover {
+  background-color: #2b7a46;
 }
