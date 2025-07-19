@@ -6,12 +6,35 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  /* Light mode variables */
+  --background-color: #f7f6f6;
+  --text-color: #213547;
+  --card-background: #ffffff;
+  --border-color: #e0e0e0;
+  --button-background: #ffffff;
+  --button-hover-background: #e0e0e0;
+  --text-highlight-background: #d6eaff;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+  /* Dark mode variables */
+  --background-color: #292828;
+  --text-color: #e7e7e7;
+  --card-background: #313131;
+  --border-color: #696969;
+  --button-background: #2a2a2a;
+  --button-hover-background: #3a3a3a;
+  --text-highlight-background: #5b84cf;
 }
 
 /* Add any other global resets or base element styles here */

@@ -11,7 +11,7 @@
   /* --- Main Application Title --- */
   .app-title {
     text-align: center;
-    color: #2c3e50;
+    color: var(--text-color);
     margin-top: 0;
     margin-bottom: 25px;
     font-weight: 600;

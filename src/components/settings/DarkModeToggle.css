@@ -1,0 +1,44 @@
+.dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.dark-mode-label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.toggle-button {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  background-color: #ccc;
+  border-radius: 28px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-button .slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle-button .slider.on {
+  transform: translateX(22px);
+}
+
+.toggle-button:has(.slider.on) {
+  background-color: #2196F3;
+}
