@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './SettingsPanel.css';
 import ClearCacheButton from './settings/ClearCacheButton';
+import RefreshDataButton from './settings/RefreshDataButton';
 
 const SettingsPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,6 +34,7 @@ const SettingsPanel = () => {
         <div className="settings-panel-card">
           <h3>Settings</h3>
           <ClearCacheButton />
+          <RefreshDataButton />
         </div>
       )}
     </div>
