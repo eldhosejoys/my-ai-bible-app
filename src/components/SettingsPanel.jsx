@@ -3,6 +3,7 @@ import './SettingsPanel.css';
 import ClearCacheButton from './settings/ClearCacheButton';
 import RefreshDataButton from './settings/RefreshDataButton';
 import RandomVerseButton from './settings/RandomVerseButton';
+import DarkModeToggle from './settings/DarkModeToggle';
 
 const SettingsPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +39,9 @@ const SettingsPanel = () => {
             <ClearCacheButton />
             <RefreshDataButton />
            
-          </div> <RandomVerseButton />
+          </div> 
+          <RandomVerseButton />
+          <DarkModeToggle />
         </div>
       )}
     </div>

@@ -4,8 +4,8 @@
 }
 
 .settings-dropdown-button {
-  background-color: #ffffff;
-  border: 1px solid #d1d5db;
+  background-color: var(--button-background);
+  border: 1px solid var(--border-color);
   padding: 8px 12px;
   cursor: pointer;
   border-radius: 8px;
@@ -13,10 +13,11 @@
   font-weight: 500;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  color: var(--text-color);
 }
 
 .settings-dropdown-button:hover {
-  background-color: #f9fafb;
+  background-color: var(--button-hover-background);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -28,16 +29,16 @@
     margin-top: 0px;
     width: 280px; /* Adjust width as needed */
     border-radius: 8px;
-    background-color: #fff;
+    background-color: var(--card-background);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    border: 1px solid #d1d5db;
+    border: 1px solid var(--border-color);
     padding: 20px;
 }
 
 .settings-panel-card h3 {
     margin-top: 0;
     margin-bottom: 15px;
-    color: #333;
+    color: var(--text-color);
 }
 
 .button-row {

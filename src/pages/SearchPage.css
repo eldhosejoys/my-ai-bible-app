@@ -5,6 +5,7 @@
     padding: 20px;
     max-width: 900px; /* Max width for search results area */
     margin: 20px auto; /* Center page content */
+    background-color: var(--card-background);
   }
   
   /* --- Back/Home Navigation --- */
@@ -22,8 +23,8 @@
     align-items: center;
     justify-content: center;
     background: none;
-    border: 1px solid #ccc;
-    color: #555;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
     padding: 0 12px; /* Horizontal padding */
     height: 34px; /* Match height */
     border-radius: 5px;
@@ -34,8 +35,8 @@
     transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   }
   .search-page-nav .nav-button:hover {
-      background-color: #eee;
-      color: #333;
+      background-color: var(--button-hover-background);
+      color: var(--text-color);
       border-color: #bbb;
   }
   /* Specific adjustments if needed */
@@ -57,7 +58,7 @@
   /* --- Page Title --- */
   .search-page-title {
     text-align: center;
-    color: #333;
+    color: var(--text-color);
     margin-top: 0; /* Adjusted margin */
     margin-bottom: 25px; /* Space below title */
     font-size: 1.6em; /* Adjust size */
@@ -74,7 +75,7 @@
   /* Status indicators */
   .search-status {
       text-align: center;
-      color: #777;
+      color: var(--text-color);
       font-style: italic;
       margin: 20px 0;
       font-size: 1.1em;
@@ -91,7 +92,7 @@
   }
   .search-prompt {
       text-align: center;
-      color: #666;
+      color: var(--text-color);
       font-size: 1.1em;
       margin-top: 40px;
       margin-bottom: 20px;
@@ -100,12 +101,12 @@
   /* --- Results Container --- */
   .search-results-container {
       margin: 0 auto; /* Centered within its parent */
-      border-top: 1px solid #eee;
+      border-top: 1px solid var(--border-color);
       padding-top: 25px;
   }
   .search-results-container h2 {
       font-size: 1.3em;
-      color: #333;
+      color: var(--text-color);
       margin: 0 0 20px 0; /* Adjust margins */
       text-align: center;
       font-weight: 500;
@@ -121,13 +122,13 @@
   /* Individual Result Item */
   .search-result-item {
       margin-bottom: 18px; /* Increased space */
-      border: 1px solid #e0e0e0;
+      border: 1px solid var(--border-color);
       border-radius: 6px;
       transition: background-color 0.2s ease, box-shadow 0.2s ease;
-      background-color: #fff; /* Ensure background for hover effect */
+      background-color: var(--card-background); /* Ensure background for hover effect */
   }
   .search-result-item:hover {
-      background-color: #f9fafb;
+      background-color: var(--button-hover-background);
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   }
   
@@ -153,7 +154,7 @@
       margin: 0;
       font-size: 1em;
       line-height: 1.7; /* Readable line height */
-      color: #444; /* Slightly darker text */
+      color: var(--text-color); /* Slightly darker text */
   }
   
   /* Highlighted Text using <mark> tag */
