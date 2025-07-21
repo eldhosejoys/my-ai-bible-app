@@ -78,7 +78,7 @@
       color: var(--text-color);
       font-style: italic;
       margin: 20px 0;
-      font-size: 1.1em;
+      font-size: calc(var(--font-size) * 1.1);
   }
   .search-error {
       text-align: center;
@@ -93,7 +93,7 @@
   .search-prompt {
       text-align: center;
       color: var(--text-color);
-      font-size: 1.1em;
+      font-size: calc(var(--font-size) * 1.1);
       margin-top: 40px;
       margin-bottom: 20px;
   }
@@ -146,13 +146,13 @@
       font-weight: 600;
       color: #007bff; /* Link color */
       margin-bottom: 8px; /* Increased space */
-      font-size: 0.95em;
+      font-size: calc(var(--font-size) * 0.95);
   }
   
   /* Verse Text */
   .result-text {
       margin: 0;
-      font-size: 1em;
+      font-size: var(--font-size);
       line-height: 1.7; /* Readable line height */
       color: var(--text-color); /* Slightly darker text */
   }
@@ -173,7 +173,7 @@
       text-align: center;
       font-style: italic;
       color: #888;
-      font-size: 0.9em;
+      font-size: calc(var(--font-size) * 0.9);
       margin: 20px 0 10px 0; /* Adjust margin */
       padding: 10px;
       background-color: #f8f8f8;
@@ -210,9 +210,9 @@
   /* --- Responsive Adjustments --- */
   @media (max-width: 768px) {
       .search-page-container { padding: 15px; }
-      .search-page-title { font-size: 1.5em; }
-      .result-location { font-size: 0.9em; }
-      .result-text { font-size: 0.95em; line-height: 1.6; }
+      .search-page-title { font-size: calc(var(--font-size) * 1.5); }
+      .result-location { font-size: calc(var(--font-size) * 0.9); }
+      .result-text { font-size: calc(var(--font-size) * 0.95); line-height: 1.6; }
   }
   
   @media (max-width: 576px) {
