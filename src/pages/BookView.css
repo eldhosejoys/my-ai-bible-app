@@ -70,7 +70,7 @@
   /* Search Bar within Top Bar */
   .book-view-top-bar .search-bar-container {
       flex-grow: 1; /* Allow search to take remaining space */
-      max-width: 450px; /* Limit width */
+      max-width: 1500px; /* Limit width */
       margin-bottom: 0;
       padding: 0;
       min-width: 200px; /* Ensure it doesn't get too small */
@@ -79,6 +79,7 @@
        padding: 8px 15px; /* Adjust size */
        font-size: 1em;
        margin-bottom: 0;
+       height: 45px;
   }
   
   /* --- Book Navigation and Title Container --- */

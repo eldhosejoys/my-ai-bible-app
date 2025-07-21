@@ -229,7 +229,7 @@ const SearchBar = ({ initialQuery = '' }) => {
       <input
         ref={inputRef}
         type="search"
-        placeholder="മലയാളത്തിൽ തിരയുക..." // Updated placeholder
+        placeholder="മലയാളത്തിൽ വേദവാക്യങ്ങൾ തിരയുക..." // Updated placeholder
         className="search-input"
         value={inputValue}
         onChange={handleInputChange}
