@@ -15,20 +15,24 @@ const BooksDropdown = ({ bookTitles }) => {
   return (
     <div className="books-dropdown-container">
       <button title="Books" className="books-dropdown-button" onClick={() => setIsOpen(!isOpen)}>
-      📖
+        📖
       </button>
       {isOpen && (
-        <div className="books-dropdown-menu">
-          {bookTitles.map((book) => (
-            <div
-              key={book.n}
-              className="books-dropdown-item"
-              onClick={() => handleBookSelect(book)}
-            >
-              {book.bm} 
-            </div>
-          ))}
-        </div>
+        <>
+
+          <div className="books-dropdown-overlay" onClick={() => setIsOpen(false)}></div>
+          <div className="books-dropdown-menu">
+            {bookTitles.map((book) => (
+              <div
+                key={book.n}
+                className="books-dropdown-item"
+                onClick={() => handleBookSelect(book)}
+              >
+                {book.bm}
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
