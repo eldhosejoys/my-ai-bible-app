@@ -6,6 +6,8 @@ import ErrorMessage from '../components/ErrorMessage';
 import Pagination from '../components/Pagination';
 import SearchBar from '../components/SearchBar';
 import HighlightText from '../components/HighlightText';
+import SettingsPanel from '../components/SettingsPanel';
+import BooksDropdown from '../components/BooksDropdown';
 import '../pages/SearchPage.css';
 import '../components/Pagination.css';
 
@@ -127,12 +129,18 @@ const SearchPage = () => {
   return (
     <div className="search-page-container">
        <div className="search-page-nav">
-            <button onClick={() => navigate(-1)} className="nav-button back-button" title="Back">
-                ←
-            </button>
-            <Link to="/" className="nav-button home-button" title="Home" aria-label="Go to Home">
-                🏠
-            </Link>
+            <div className='left-nav'>
+                <button onClick={() => navigate(-1)} className="nav-button back-button" title="Back">
+                    ←
+                </button>
+                <Link to="/" className="nav-button home-button" title="Home" aria-label="Go to Home">
+                    🏠
+                </Link>
+            </div>
+            <div className="top-right-nav">
+                 <BooksDropdown bookTitles={bookTitles} bibleData={bibleData} />
+                 <SettingsPanel />
+            </div>
        </div>
 
        <SearchBar initialQuery={query}/>
