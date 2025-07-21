@@ -72,9 +72,39 @@
 }
 
 
-@media (max-width: 507px) {
+/* @media (max-width: 507px) {
   .books-dropdown-menu {
     left: 0;
     right: auto;
+  }
+} */
+
+
+.books-dropdown-overlay {
+  display: none;
+}
+
+@media (max-width: 507px) {
+  .books-dropdown-menu {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    right: 20px;
+    width: auto;
+    transform: translateY(-50%);
+    box-sizing: border-box;
+    z-index: 9999;
+  }
+
+  .books-dropdown-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(3px);
+    z-index: 9999;
   }
 }

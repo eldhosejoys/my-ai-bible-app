@@ -34,15 +34,18 @@ const SettingsPanel = () => {
       </button>
 
       {isOpen && (
-        <div className="settings-panel-card">
-          <DarkModeToggle />
-          <FontSizeSlider />
-          <div className="button-row">
-            <ClearCacheButton />
-            <RefreshDataButton />
-          </div> 
-          <RandomVerseButton />
-        </div>
+        <>
+          <div className="settings-panel-overlay" onClick={() => setIsOpen(false)}></div>
+          <div className="settings-panel-card">
+            <DarkModeToggle />
+            <FontSizeSlider />
+            <div className="button-row">
+              <ClearCacheButton />
+              <RefreshDataButton />
+            </div> 
+            <RandomVerseButton />
+          </div>
+        </>
       )}
     </div>
   );
