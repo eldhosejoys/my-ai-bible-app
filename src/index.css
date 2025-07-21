@@ -28,11 +28,11 @@ body {
 
 body.dark-mode {
   /* Dark mode variables */
-  --background-color: #292828;
+  --background-color: #212529;
   --text-color: #f1f1f1;
-  --card-background: #313131;
+  --card-background: #2e3236;
   --border-color: #696969;
-  --button-background: #2a2a2a;
+  --button-background: #212529;
   --button-hover-background: #3a3a3a;
   --text-highlight-background: #5b84cf;
 }

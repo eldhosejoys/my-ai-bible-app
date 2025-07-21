@@ -43,9 +43,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: none;
+    background: var(--button-background);
     border: 1px solid var(--border-color);
- color: var(--text-color); /* Slightly lighter than title */
+    color: var(--text-color); /* Slightly lighter than title */
     padding: 0 12px; /* Horizontal padding */
     height: 34px; /* Match height */
     border-radius: 5px;
