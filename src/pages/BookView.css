@@ -140,14 +140,14 @@
   }
   .book-view-chapter-nav .chapter-button {
       min-width: 42px; height: 38px; padding: 0 8px; font-size: 0.88em;
-      background-color: var(--button-background); border: 1px solid var(--border-color); border-radius: 5px; color: #007bff;
+      background-color: var(--button-background); border: 1px solid var(--border-color); border-radius: 5px; color: var(--text-color);
       font-weight: 500; cursor: pointer; transition: background-color 0.2s, color 0.2s, border-color 0.2s;
       display: inline-flex; align-items: center; justify-content: center; text-decoration: none; flex-shrink: 0;
   }
   .book-view-chapter-nav .chapter-button:hover:not(.active) { background-color: var(--button-hover-background); border-color: #ccc; color: #0056b3; }
   .book-view-chapter-nav .chapter-button.active { background-color: #007bff; color: #fff; border-color: #007bff; font-weight: bold; cursor: default; }
   .book-view-chapter-nav .info-button { color: var(--text-color); border-color: var(--border-color); background-color: var(--button-background); min-width: 55px; }
-  .book-view-chapter-nav .info-button:hover:not(.active) { background-color: var(--button-hover-background); border-color: #adb5bd; color: #343a40; }
+  .book-view-chapter-nav .info-button:hover:not(.active) { background-color: var(--button-hover-background); border-color: #adb5bd; color: var(--text-color); }
   .book-view-chapter-nav .info-button.active { background-color: #5a6268; color: #fff; border-color: #5a6268; }
   
   /* --- Main Content Area --- */
