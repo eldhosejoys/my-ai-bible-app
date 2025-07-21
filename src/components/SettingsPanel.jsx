@@ -4,6 +4,7 @@ import ClearCacheButton from './settings/ClearCacheButton';
 import RefreshDataButton from './settings/RefreshDataButton';
 import RandomVerseButton from './settings/RandomVerseButton';
 import DarkModeToggle from './settings/DarkModeToggle';
+import FontSizeSlider from './settings/FontSizeSlider';
 
 const SettingsPanel = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +36,7 @@ const SettingsPanel = () => {
       {isOpen && (
         <div className="settings-panel-card">
           <DarkModeToggle />
+          <FontSizeSlider />
           <div className="button-row">
             <ClearCacheButton />
             <RefreshDataButton />

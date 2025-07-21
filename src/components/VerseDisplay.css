@@ -19,6 +19,7 @@
     border-left: 4px solid var(--border-color);
     background-color: var(--background-color);
     border-radius: 4px;
+    font-size: var(--font-size);
   }
 
   .verse-heading > * {
@@ -32,7 +33,7 @@
     margin-top: 10px;
     padding: 0 5px; /* Adjust horizontal padding */
     line-height: 1.8;
-    font-size: 1.1em;
+    font-size: var(--font-size);
     color: var(--text-color);
   }
   
@@ -87,7 +88,7 @@
   /* Responsive adjustments for verse text */
   @media (max-width: 600px) {
       .verses-container {
-          font-size: 1em;
+          font-size: calc(var(--font-size) * 0.9);
           line-height: 1.7;
       }
   }

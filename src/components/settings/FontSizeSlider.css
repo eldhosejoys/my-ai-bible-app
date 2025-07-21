@@ -1,0 +1,43 @@
+/* src/components/settings/FontSizeSlider.css */
+.font-size-slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+.font-size-slider-container label {
+  margin-right: 5px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.font-size-slider-container input[type="range"] {
+  flex-grow: 1;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.font-size-slider-container span {
+  min-width: 35px;
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+
+}
+
+.font-size-reset-button {
+  background-color: #e96d65;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.font-size-reset-button:hover {
+  background-color: #d32f2f;
+}
