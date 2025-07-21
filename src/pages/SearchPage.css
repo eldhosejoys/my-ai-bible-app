@@ -12,9 +12,16 @@
   .search-page-nav {
       margin-bottom: 20px; /* Increased space below nav */
       display: flex; /* Use Flexbox */
+      justify-content: space-between;
       align-items: center;
       gap: 10px; /* Space between buttons */
       height: 36px; /* Give it some consistent height */
+  }
+
+  .left-nav{
+    display: flex; /* Use Flexbox */
+    align-items: center;
+    gap: 10px;
   }
   
   /* Generic styles for nav buttons in this page */
@@ -218,4 +225,10 @@
   @media (max-width: 576px) {
       .search-result-link { padding: 12px 15px; }
       .search-page-nav { height: auto; /* Allow wrap */ }
+  }
+
+  .top-right-nav{
+    display: flex;
+    gap: 10px;
+    align-items: center;
   }

@@ -233,11 +233,8 @@
       }
   }
   
-  /* Optional: Hide on very small screens */
-  /*
-  @media (max-width: 400px) {
-      .side-nav-button {
-          display: none;
-      }
+  .top-right-nav{
+    display: flex;
+    gap: 10px;
+    align-items: center;
   }
-  */

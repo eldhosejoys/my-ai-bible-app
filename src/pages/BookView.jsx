@@ -206,9 +206,10 @@ const BookView = () => {
 
         <SearchBar initialQuery="" />
         {/* Dropdown will appear below the button */}
-        <div>
-          <SettingsPanel />
+        <div className='top-right-nav'>
+         
           <BooksDropdown bookTitles={bookTitles} />
+          <SettingsPanel />
         </div>
 
 

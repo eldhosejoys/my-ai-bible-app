@@ -1,7 +1,6 @@
 .books-dropdown-container {
   position: relative;
   display: inline-block;
-  margin-left: 8px;
   font-family: 'Noto Sans Malayalam', sans-serif; /* Malayalam-friendly font */
 }
 
