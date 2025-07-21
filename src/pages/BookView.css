@@ -3,7 +3,7 @@
 /* --- Base Container --- */
 .book-view-container {
     padding: 20px 15px;
-    max-width: 950px; /* Max width of your content area - IMPORTANT for calc() */
+    max-width: 1200px; /* Max width of your content area - IMPORTANT for calc() */
     margin: 20px auto;
     background-color: var(--card-background);
     border-radius: 8px;
@@ -181,19 +181,19 @@
       opacity: 0.3; cursor: not-allowed; background-color: rgba(100, 100, 100, 0.4);
   }
   
-  /* Horizontal Positioning using calc() - ADJUST 950px if your container max-width changes */
+  /* Horizontal Positioning using calc() - ADJUST 1200px if your container max-width changes */
   .prev-button {
       /* Position left edge: 50% viewport - half-container - button-width - 15px-gap */
-      left: calc(50% - (950px / 2) - 40px - 50px);
+      left: calc(50% - (1200px / 2) - 60px - 15px);
   }
   .next-button {
       /* Position right edge: 50% viewport - half-container - button-width - 15px-gap */
-      right: calc(50% - (950px / 2) - 40px - 50px);
+      right: calc(50% - (1200px / 2) - 60px - 15px);
   }
   
   /* Responsive Adjustments for Fixed Buttons */
-  /* Adjust breakpoint (1100px) based on 950px container + buttons + gaps */
-  @media (max-width: 1100px) {
+  /* Adjust breakpoint (1400px) based on 1200px container + buttons + gaps */
+  @media (max-width: 1400px) {
       .prev-button {
           left: 15px; /* Fallback: 15px from viewport edge */
       }

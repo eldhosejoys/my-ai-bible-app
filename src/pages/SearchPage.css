@@ -3,7 +3,7 @@
 /* --- Base Page Container --- */
 .search-page-container {
     padding: 20px;
-    max-width: 950px; /* Max width for search results area */
+    max-width: 1200px; /* Max width for search results area */
     margin: 20px auto; /* Center page content */
     background-color: var(--background-color);
   }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './FontSizeSlider.css';
 
-const DEFAULT_FONT_SIZE = 16;
+const DEFAULT_FONT_SIZE = 20;
 
 const FontSizeSlider = () => {
   const [fontSize, setFontSize] = useState(localStorage.getItem('fontSize') || DEFAULT_FONT_SIZE);
