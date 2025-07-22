@@ -154,6 +154,9 @@
       color: #007bff; /* Link color */
       margin-bottom: 8px; /* Increased space */
       font-size: calc(var(--font-size) * 0.95);
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      min-width: 0; /*  This is the key fix for flexbox overflow */
   }
   
   /* Verse Text */
@@ -162,6 +165,9 @@
       font-size: var(--font-size);
       line-height: 1.7; /* Readable line height */
       color: var(--text-color); /* Slightly darker text */
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      min-width: 0; /*  This is the key fix for flexbox overflow */
   }
   
   /* Highlighted Text using <mark> tag */
