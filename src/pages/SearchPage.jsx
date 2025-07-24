@@ -36,6 +36,22 @@ const SearchPage = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchError, setSearchError] = useState('');
 
+    useEffect(() => {
+        if (query) {
+            document.title = `Search for "${query}" - Malayalam Bible`;
+        } else {
+            document.title = "Search - Malayalam Bible";
+        }
+
+        let metaDescription = document.querySelector('meta[name="description"]');
+        if (!metaDescription) {
+            metaDescription = document.createElement('meta');
+            metaDescription.name = 'description';
+            document.head.appendChild(metaDescription);
+        }
+        metaDescription.content = `Search the Malayalam Bible for keywords, phrases, and verses. Find what you're looking for quickly and easily.`;
+    }, [query]);
+
   // Effect to trigger data loading if a query is present
   useEffect(() => {
     if (query.trim() && !bibleData) {
