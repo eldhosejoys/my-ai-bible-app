@@ -50,6 +50,38 @@ const BookView = () => {
   const prevBookExists = currentBookIndex > 0;
   const nextBookExists = currentBookIndex !== -1 && currentBookIndex < bookTitles.length - 1;
 
+  useEffect(() => {
+    if (bookInfo && bibleData && !isBibleLoading && bibleData[bookId] && bibleData[bookId][currentChapter]) {
+        const { bm: malayalamName, be: englishName } = bookInfo;
+        const title = `${malayalamName} (${englishName}) - Malayalam Bible`;
+        document.title = title;
+
+        let description = '';
+        if (highlightedVerse) {
+            const verseObject = bibleData[bookId][currentChapter].find(v => v.v === highlightedVerse);
+            if (verseObject) {
+                description = verseObject.t;
+            }
+        } else {
+            const firstVerseObject = bibleData[bookId][currentChapter][0];
+            if (firstVerseObject) {
+                description = `${malayalamName} അദ്ധ്യായം ${currentChapter} - ${firstVerseObject.t}`;
+            }
+        }
+
+        if (description) {
+            let metaDescription = document.querySelector('meta[name="description"]');
+            if (!metaDescription) {
+                metaDescription = document.createElement('meta');
+                metaDescription.name = 'description';
+                document.head.appendChild(metaDescription);
+            }
+            metaDescription.content = description;
+        }
+    }
+}, [bookInfo, currentChapter, highlightedVerse, bibleData, bookId, isBibleLoading]);
+
+
   const navigateBook = useCallback((direction) => {
     if (currentBookIndex === -1) return;
 
