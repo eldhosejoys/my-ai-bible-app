@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useBibleData } from '../hooks/useBibleData'; // Hook to fetch book titles
 import BookCard from '../components/BookCard';       // Component to display each book
 import LoadingSpinner from '../components/LoadingSpinner'; // Loading indicator
@@ -9,6 +9,17 @@ import './Home.css';                                   // Styles for the Home pa
 const Home = () => {
   // Fetch book titles and data loading status/errors
   const { bookTitles, isLoading: isDataLoading, error: dataError } = useBibleData();
+
+  useEffect(() => {
+    document.title = "മലയാളം ബൈബിൾ (Malayalam Bible) - Read Online";
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.name = 'description';
+        document.head.appendChild(metaDescription);
+    }
+    metaDescription.content = "Read the complete Malayalam Bible online. Easy to read, search, and navigate.";
+  }, []);
 
   // --- Render Logic ---
 
